@@ -16,6 +16,11 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  activated: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
   updated: {
     type: Date,
     default: Date.now

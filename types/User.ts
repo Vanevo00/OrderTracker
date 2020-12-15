@@ -1,9 +1,11 @@
 import { Document } from 'mongoose'
 
 export interface IUser {
+    _id?: any
     name: string
     email: string
-    password: number
+    password: string
+    activated?: boolean
     updated?: string
     created?: string
 }
