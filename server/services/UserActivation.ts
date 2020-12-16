@@ -1,10 +1,10 @@
-
 import { v4 as uuid } from 'uuid'
 import nodemailer from 'nodemailer'
-import config from 'config'
 import { IUser } from '../../types/User'
 import { IUserActivation, IUserActivationArgs } from '../../types/UserActivation'
 import { UserActivation } from '../models/UserActivation'
+import config from 'config'
+import { generateHtmlActivationEmail, generatePlainActivationEmail } from '../mailer/activationEmail'
 
 export class UserActivationService {
   async findOne (args: IUserActivationArgs): Promise<IUserActivation | null> {
@@ -41,22 +41,22 @@ export class UserActivationService {
   async sendActivationEmail (userEmail: string, activationCode: string) {
     try {
       const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: config.get('nodemailer.service'),
         auth: {
-          user: 'vanekvoj@gmail.com',
-          pass: '3psi4psi@'
+          user: config.get('nodemailer.user'),
+          pass: config.get('nodemailer.pass')
         }
       })
 
-      const info = await transporter.sendMail({
-        from: 'grady.terry60@ethereal.email', // sender address
-        to: 'vanevo00@gmail.com', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>' // html body
+      await transporter.sendMail({
+        from: config.get('nodemailer.user'),
+        to: userEmail,
+        subject: 'Správce objednávek - aktivační kód',
+        text: generatePlainActivationEmail(activationCode),
+        html: generateHtmlActivationEmail(activationCode)
       })
 
-      console.log(`Message sent: ${info.messageId}`)
+      console.log(`Email with activation code sent to: ${userEmail}`)
     } catch (err) {
       console.log(err)
     }

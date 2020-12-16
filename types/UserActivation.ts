@@ -4,7 +4,7 @@ import { IUser } from './User'
 export interface IUserActivation {
     _id?: any
     activationCode: string
-    user: IUser
+    user: string
     created?: string
 }
 
