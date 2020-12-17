@@ -17,3 +17,8 @@ export interface IRegisterUserArgs {
     email: IUser['email']
     password: IUser['password']
 }
+
+export interface ILoginUserArgs {
+    email: IUser['email']
+    password: IUser['password']
+}

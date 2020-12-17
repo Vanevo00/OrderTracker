@@ -1,5 +1,5 @@
 import { User } from '../models/User'
-import { IRegisterUserArgs, IUserDocument } from '../../types/User'
+import { ILoginUserArgs, IRegisterUserArgs, IUserDocument } from '../../types/User'
 import bcrypt from 'bcryptjs'
 import validateEmail from '../utils/validateEmail'
 import validatePassword from '../utils/validatePassword'
@@ -17,6 +17,24 @@ export class UserService {
             await userActivationService.create(createdUser)
 
             return createdUser
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
+
+    async loginByPassword (args: ILoginUserArgs): Promise<IUserDocument> {
+        try {
+            const {
+                email,
+                password
+            } = args
+
+            const user = await User.findOne({email})
+
+            if (!user) throw new Error ('user not found')
+            if (!(await bcrypt.compare(password, user.password))) throw new Error ('invalid password')
+
+            return user
         } catch (err) {
             throw new Error(err)
         }
