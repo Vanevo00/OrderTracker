@@ -5,6 +5,7 @@ import Paginator from './inputs/Paginator'
 import SortingOrder from './enums/SortingOrder'
 import Sorting from './inputs/Sorting'
 import User from './User'
+import UserActivation from './UserActivation'
 
 export default [
   Date,
@@ -13,5 +14,6 @@ export default [
   SortingOrder,
   Paginator,
   Sorting,
-  User
+  User,
+  UserActivation
 ]

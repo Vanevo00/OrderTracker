@@ -6,6 +6,7 @@ export default gql`
         name: String!
         email: String!
         password: Int!
+        activated: Boolean!
         updated: Date!
         created: Date!
     }

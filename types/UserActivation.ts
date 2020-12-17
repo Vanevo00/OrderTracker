@@ -1,10 +1,10 @@
 import { Document } from 'mongoose'
-import { IUser } from './User'
+import { IUser, IUserDocument } from './User'
 
 export interface IUserActivation {
     _id?: any
     activationCode: string
-    user: string
+    user: IUserDocument
     created?: string
 }
 

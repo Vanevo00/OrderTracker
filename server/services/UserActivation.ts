@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import nodemailer from 'nodemailer'
-import { IUser } from '../../types/User'
+import { IUser, IUserDocument } from '../../types/User'
 import { IUserActivation, IUserActivationArgs } from '../../types/UserActivation'
 import { UserActivation } from '../models/UserActivation'
 import config from 'config'
@@ -17,9 +17,18 @@ export class UserActivationService {
     }
   }
 
-  async create (user: IUser): Promise<void> {
+  async activate (args: IUserActivationArgs): Promise<IUserDocument> {
+    const activation = await this.findOne(args)
+    if (!activation) throw new Error("activation code not found")
+
+    activation.user.activated = true
+
+    return activation.user.save()
+  }
+
+  async create (user: IUserDocument): Promise<void> {
     try {
-      const preparedActivation = this.prepareActivation(user._id)
+      const preparedActivation = this.prepareActivation(user)
 
       const createdActivation = await UserActivation.create(preparedActivation)
 
@@ -29,7 +38,7 @@ export class UserActivationService {
     }
   }
 
-  prepareActivation (user: string) {
+  prepareActivation (user: IUserDocument) {
     const activationCode = uuid()
 
     return {
