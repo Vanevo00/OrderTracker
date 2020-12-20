@@ -1,8 +1,9 @@
 import React from 'react'
+import { Alert } from 'react-bootstrap'
 
 const Home = () => {
   return (
-        <div>Prdel</div>
+      <Alert variant='info'>Welcome to OrderTracker</Alert>
   )
 }
 
