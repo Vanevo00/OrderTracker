@@ -3,10 +3,12 @@ import registerUser from './User/registerUser'
 import activateUser from './UserActivation/activateUser'
 import loginByPassword from './User/loginByPassword'
 import findOneUser from './User/findOneUser'
+import checkUserToken from './User/checkUserToken'
 
 export default merge(
     findOneUser,
     registerUser,
     activateUser,
+    checkUserToken,
     loginByPassword
 )

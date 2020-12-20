@@ -1,12 +1,17 @@
 import { User } from '../models/User'
-import { IFindOneUserArgs, ILoginUserArgs, IRegisterUserArgs, IUserDocument } from '../../types/User'
+import {
+    IFindOneUserArgs,
+    ILoginUserArgs,
+    IRegisterUserArgs,
+    IUserDocument
+} from '../../types/User'
 import bcrypt from 'bcryptjs'
 import validateEmail from '../utils/validateEmail'
 import validatePassword from '../utils/validatePassword'
 import { UserActivationService } from './UserActivation'
 import jwt from 'jsonwebtoken'
 import config from 'config'
-import { Response } from 'express'
+import { Response, Request } from 'express'
 
 const userActivationService = new UserActivationService()
 
@@ -51,6 +56,16 @@ export class UserService {
             return user
         } catch (err) {
             throw new Error(err)
+        }
+    }
+
+    async checkUserToken (req: Request, res: Response): Promise<IUserDocument | boolean> {
+        try {
+            //@ts-ignore
+            return jwt.verify(req.cookies.userToken, config.get('jwt.secret'))
+        } catch (err) {
+            res.clearCookie('userToken')
+            return false
         }
     }
 

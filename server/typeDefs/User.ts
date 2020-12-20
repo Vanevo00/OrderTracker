@@ -17,6 +17,8 @@ export default gql`
             name: String
             email: String
         ): User
+        
+        checkUserToken: User
     }
 
     extend type Mutation {
