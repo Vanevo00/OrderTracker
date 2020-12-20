@@ -59,6 +59,11 @@ export class UserService {
         }
     }
 
+    async logout (res: Response): Promise<boolean> {
+        res.clearCookie('userToken')
+        return true
+    }
+
     async checkUserToken (req: Request, res: Response): Promise<IUserDocument | boolean> {
         try {
             //@ts-ignore
