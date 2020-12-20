@@ -1,13 +1,22 @@
 import { User } from '../models/User'
-import { ILoginUserArgs, IRegisterUserArgs, IUserDocument } from '../../types/User'
+import { IFindOneUserArgs, ILoginUserArgs, IRegisterUserArgs, IUserDocument } from '../../types/User'
 import bcrypt from 'bcryptjs'
 import validateEmail from '../utils/validateEmail'
 import validatePassword from '../utils/validatePassword'
 import { UserActivationService } from './UserActivation'
+import jwt from 'jsonwebtoken'
+import config from 'config'
+import { Response } from 'express'
 
 const userActivationService = new UserActivationService()
 
 export class UserService {
+    async findOne (args: IFindOneUserArgs): Promise<IUserDocument> {
+        const user = await User.findOne(args)
+        if (!user) throw new Error ('user not found')
+        return user
+    }
+
     async register (args: IRegisterUserArgs): Promise<IUserDocument> {
         try {
             const preparedUserData = await this.validateAndPrepareUserData(args)
@@ -22,7 +31,7 @@ export class UserService {
         }
     }
 
-    async loginByPassword (args: ILoginUserArgs): Promise<IUserDocument> {
+    async loginByPassword (args: ILoginUserArgs, res: Response): Promise<IUserDocument> {
         try {
             const {
                 email,
@@ -33,6 +42,11 @@ export class UserService {
 
             if (!user) throw new Error ('user not found')
             if (!(await bcrypt.compare(password, user.password))) throw new Error ('invalid password')
+
+            const userToken = jwt.sign(user.toJSON(), config.get('jwt.secret'), { expiresIn: '7 days' })
+            res.cookie('userToken', userToken, {
+                httpOnly: true
+            })
 
             return user
         } catch (err) {

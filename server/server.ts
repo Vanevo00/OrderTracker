@@ -3,12 +3,19 @@ import cors from 'cors'
 import { ApolloServer } from 'apollo-server-express'
 import { connectDB } from './utils/connectDB'
 import schema from './schema'
+import cookieParser from 'cookie-parser'
 
 const server = new ApolloServer({
   schema,
-  context: ({ req, res }) => ({ req, res })
+  context: ({ req, res }) => ({ req, res }),
+  playground: {
+    settings: {
+      'request.credentials': 'include'
+    }
+  }
 })
 const app = express()
+app.use(cookieParser())
 server.applyMiddleware({ app })
 const port = 3333
 

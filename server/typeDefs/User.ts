@@ -5,10 +5,18 @@ export default gql`
         _id: ID!
         name: String!
         email: String!
-        password: Int!
+        password: String!
         activated: Boolean!
         updated: Date!
         created: Date!
+    }
+    
+    extend type Query {
+        findOneUser(
+            _id: ID
+            name: String
+            email: String
+        ): User
     }
 
     extend type Mutation {

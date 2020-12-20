@@ -22,3 +22,9 @@ export interface ILoginUserArgs {
     email: IUser['email']
     password: IUser['password']
 }
+
+export interface IFindOneUserArgs {
+    _id?: IUser['_id']
+    name?: IUser['name']
+    email?: IUser['email']
+}
