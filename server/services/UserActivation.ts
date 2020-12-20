@@ -19,7 +19,7 @@ export class UserActivationService {
 
   async activate (args: IUserActivationArgs): Promise<IUserDocument> {
     const activation = await this.findOne(args)
-    if (!activation) throw new Error("activation code not found")
+    if (!activation) throw new Error('activation code not found')
 
     activation.user.activated = true
 

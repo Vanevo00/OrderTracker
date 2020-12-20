@@ -5,14 +5,14 @@ import { IUserDocument } from '../../../types/User'
 const userService = new UserService()
 
 export default {
-    Query: {
-        checkUserToken: async (_: undefined, args: undefined, ctx: IContext): Promise<IUserDocument | boolean> => {
-            const {
-                req,
-                res
-            } = ctx
+  Query: {
+    checkUserToken: async (_: undefined, args: undefined, ctx: IContext): Promise<IUserDocument | boolean> => {
+      const {
+        req,
+        res
+      } = ctx
 
-            return await userService.checkUserToken(req, res)
-        }
+      return await userService.checkUserToken(req, res)
     }
+  }
 }

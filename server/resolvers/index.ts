@@ -7,10 +7,10 @@ import checkUserToken from './User/checkUserToken'
 import logout from './User/logout'
 
 export default merge(
-    findOneUser,
-    registerUser,
-    activateUser,
-    checkUserToken,
-    loginByPassword,
-    logout
+  findOneUser,
+  registerUser,
+  activateUser,
+  checkUserToken,
+  loginByPassword,
+  logout
 )
