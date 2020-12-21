@@ -1,0 +1,1 @@
+declare var GRAPHQL_ENDPOINT: string

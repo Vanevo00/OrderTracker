@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev -p 3334",
+    "dev": "NODE_CONFIG_DIR=\"../config\" next dev -p 3334",
     "build": "next build",
     "start": "next start"
   },
@@ -12,8 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.3.6",
     "@zeit/next-css": "^1.0.1",
     "bootstrap": "^4.5.3",
+    "config": "^3.3.3",
+    "graphql": "^15.4.0",
     "next": "^10.0.3",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
