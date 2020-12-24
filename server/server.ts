@@ -1,9 +1,16 @@
 import express from 'express'
-import cors from 'cors'
 import { ApolloServer } from 'apollo-server-express'
 import { connectDB } from './utils/connectDB'
 import schema from './schema'
 import cookieParser from 'cookie-parser'
+import config from 'config'
+
+const clientDomain: string = config.get('client.domain')
+
+const corsOptions = {
+  origin: clientDomain,
+  credentials: true
+}
 
 const server = new ApolloServer({
   schema,
@@ -16,14 +23,10 @@ const server = new ApolloServer({
 })
 const app = express()
 app.use(cookieParser())
-server.applyMiddleware({ app })
+server.applyMiddleware({ app, cors: corsOptions })
 const port = 3333
 
 connectDB()
-
-app.use(express.json()) // to accept body data
-app.options('/', cors()) // CORS pre-flight
-app.use(cors()) // enable CORS
 
 app.get('/', (req, res) => res.send('Welcome to Order Tracker api'))
 
