@@ -1,7 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Alert, Button, Form } from 'react-bootstrap'
 import { apolloClient } from '../../apollo/apollo'
 import { gql } from '@apollo/client'
+import Link from 'next/link'
 
 const LOGIN_BY_PASSWORD = gql`
   mutation(
@@ -23,8 +24,10 @@ const Login = () => {
     email: '',
     password: ''
   })
+  const [errorMessage, setErrorMessage] = useState('')
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setErrorMessage('')
     setInputValues({
       ...inputValues,
       [e.target.name]: e.target.value
@@ -47,7 +50,16 @@ const Login = () => {
         }
       })
     } catch (err) {
-      console.log(err.message)
+      switch (err.message) {
+        case 'Error: invalid password':
+          setErrorMessage('nesprávné heslo')
+          break
+        case 'Error: user not found':
+          setErrorMessage('uživatel s tímto emailem nenalezen')
+          break
+        default:
+          setErrorMessage(err.message)
+      }
     }
   }
 
@@ -64,9 +76,15 @@ const Login = () => {
             <Form.Label>Heslo</Form.Label>
             <Form.Control type="password" name='password' placeholder="heslo" value={inputValues.password} onChange={onChange} required/>
           </Form.Group>
-          <Button variant="primary" type="submit">
+          {errorMessage && <Alert variant='danger' className='p-2'>{errorMessage}</Alert>}
+          <Button variant="primary" type="submit" block>
             Přihlásit se
           </Button>
+          <Link href='/registrace'>
+            <div className='mt-3 text-primary pointer'>
+              <a>Založit nový účet</a>
+            </div>
+          </Link>
         </Form>
       </div>
   )
