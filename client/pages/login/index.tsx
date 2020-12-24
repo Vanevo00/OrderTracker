@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import { Alert, Button, Form } from 'react-bootstrap'
+import { Alert, Button, Form, Spinner } from 'react-bootstrap'
 import { apolloClient } from '../../apollo/apollo'
 import { gql } from '@apollo/client'
 import Link from 'next/link'
@@ -25,6 +25,7 @@ const Login = () => {
     password: ''
   })
   const [errorMessage, setErrorMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setErrorMessage('')
@@ -35,13 +36,15 @@ const Login = () => {
   }
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+
     try {
       const {
         email,
         password
       } = inputValues
 
-      e.preventDefault()
       await apolloClient.mutate({
         mutation: LOGIN_BY_PASSWORD,
         variables: {
@@ -61,24 +64,35 @@ const Login = () => {
           setErrorMessage(err.message)
       }
     }
+    setLoading(false)
   }
 
   return (
       <div className='center-content'>
-        <Form className='white-form p-4 rounded shadow' onSubmit={onSubmit} >
+        <Form className='white-form p-4 shadow responsive-form' onSubmit={onSubmit} >
           <h1 className="h3 mb-3 fw-normal">Přihlášení</h1>
-          <Form.Group controlId="formBasicEmail">
+          <Form.Group>
             <Form.Label>Email</Form.Label>
             <Form.Control type='email' name='email' placeholder='email' value={inputValues.email} onChange={onChange} required/>
           </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group>
             <Form.Label>Heslo</Form.Label>
             <Form.Control type="password" name='password' placeholder="heslo" value={inputValues.password} onChange={onChange} required/>
           </Form.Group>
           {errorMessage && <Alert variant='danger' className='p-2'>{errorMessage}</Alert>}
           <Button variant="primary" type="submit" block>
-            Přihlásit se
+            {
+              loading
+                ? <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                  />
+                : 'Přihlásit se'
+            }
           </Button>
           <Link href='/registrace'>
             <div className='mt-3 text-primary pointer'>

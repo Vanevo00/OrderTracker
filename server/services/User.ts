@@ -12,6 +12,8 @@ import { UserActivationService } from './UserActivation'
 import jwt from 'jsonwebtoken'
 import config from 'config'
 import { Response, Request } from 'express'
+import validateDuplicates from '../utils/validateDuplicate'
+import validateDuplicate from '../utils/validateDuplicate'
 
 const userActivationService = new UserActivationService()
 
@@ -43,7 +45,7 @@ export class UserService {
         password
       } = args
 
-      const user = await User.findOne({ email })
+      const user = await User.findOne({ email: email.toLowerCase() })
 
       if (!user) throw new Error('user not found')
       if (!(await bcrypt.compare(password, user.password))) throw new Error('invalid password')
@@ -76,11 +78,14 @@ export class UserService {
 
   async validateAndPrepareUserData (args: IRegisterUserArgs) {
     const {
+      name,
       email,
       password
     } = args
 
     await Promise.all([
+      validateDuplicate({ name }),
+      validateDuplicate({ email }),
       validateEmail(email),
       validatePassword(password)
     ])
