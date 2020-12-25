@@ -30,6 +30,7 @@ const Register = () => {
   })
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
+  const [complete, setComplete] = useState(false)
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setErrorMessage('')
@@ -50,7 +51,10 @@ const Register = () => {
         password2
       } = inputValues
 
-      if (password !== password2) return setErrorMessage('hesla se neshodují')
+      if (password !== password2) {
+        setLoading(false)
+        return setErrorMessage('hesla se neshodují')
+      }
 
       const name = inputValues.name || email.split('@')[0]
 
@@ -62,6 +66,7 @@ const Register = () => {
           password
         }
       })
+      setComplete(true)
     } catch (err) {
       switch (err.message) {
         case 'Error: Invalid password format':
@@ -81,6 +86,14 @@ const Register = () => {
       }
     }
     setLoading(false)
+  }
+
+  if (complete) {
+    return (
+      <div className='center-content text-white text-center'>
+        Registrace proběhla úspěšně. Na Váš email byla zaslána zpráva s aktivačním kódem.
+      </div>
+    )
   }
 
   return (
