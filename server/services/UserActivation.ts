@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import nodemailer from 'nodemailer'
-import { IUser, IUserDocument } from '../../types/User'
+import { IUserDocument } from '../../types/User'
 import { IUserActivation, IUserActivationArgs } from '../../types/UserActivation'
 import { UserActivation } from '../models/UserActivation'
 import config from 'config'
@@ -20,6 +20,7 @@ export class UserActivationService {
   async activate (args: IUserActivationArgs): Promise<IUserDocument> {
     const activation = await this.findOne(args)
     if (!activation) throw new Error('activation code not found')
+    if (activation.user.activated === true) throw new Error('user already activated')
 
     activation.user.activated = true
 

@@ -60,6 +60,9 @@ const Login = () => {
         case 'Error: user not found':
           setErrorMessage('uživatel s tímto emailem nenalezen')
           break
+        case 'Error: user not activated':
+          setErrorMessage('uživatel ještě nebyl aktivován, zkontrolujte svoji emailovou schránku')
+          break
         default:
           setErrorMessage(err.message)
       }
@@ -96,7 +99,7 @@ const Login = () => {
           </Button>
           <Link href='/registrace'>
             <div className='mt-3 text-primary pointer'>
-              <a>Založit nový účet</a>
+              <a>Registrace nového účtu</a>
             </div>
           </Link>
         </Form>

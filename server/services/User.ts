@@ -49,6 +49,7 @@ export class UserService {
 
       if (!user) throw new Error('user not found')
       if (!(await bcrypt.compare(password, user.password))) throw new Error('invalid password')
+      if (!user.activated) throw new Error('user not activated')
 
       const userToken = jwt.sign(user.toJSON(), config.get('jwt.secret'), { expiresIn: '7 days' })
       res.cookie('userToken', userToken, {
