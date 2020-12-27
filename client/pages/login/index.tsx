@@ -3,6 +3,7 @@ import { Alert, Button, Form, Spinner } from 'react-bootstrap'
 import { apolloClient } from '../../apollo/apollo'
 import { gql } from '@apollo/client'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const LOGIN_BY_PASSWORD = gql`
   mutation(
@@ -26,6 +27,8 @@ const Login = () => {
   })
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
+
+  const router = useRouter()
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setErrorMessage('')
@@ -52,6 +55,8 @@ const Login = () => {
           password
         }
       })
+
+      router.push('/')
     } catch (err) {
       switch (err.message) {
         case 'Error: invalid password':
