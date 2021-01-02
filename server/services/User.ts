@@ -12,7 +12,6 @@ import { UserActivationService } from './UserActivation'
 import jwt from 'jsonwebtoken'
 import config from 'config'
 import { Response, Request } from 'express'
-import validateDuplicates from '../utils/validateDuplicate'
 import validateDuplicate from '../utils/validateDuplicate'
 
 const userActivationService = new UserActivationService()

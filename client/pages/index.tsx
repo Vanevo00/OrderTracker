@@ -1,39 +1,18 @@
 import React from 'react'
-import { Alert } from 'react-bootstrap'
-import { apolloClient } from '../apollo/apollo'
-import { gql } from '@apollo/client'
+import { Button } from 'react-bootstrap'
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
+import { logoutUser, setUser } from '../redux/actions'
 
-const TEST_QUERY = gql`
-  query($name: String!) {
-    findOneUser (name: $name) {
-      _id
-      name
-      email
-    }
-  }
-`
+const Home = () => {
+  const dispatch = useDispatch()
+  const user = useSelector((state: RootStateOrAny) => state.userState)
 
-const Home = ({ test }: any) => {
   return (
-      <Alert variant='info'>{test}</Alert>
+    <>
+      <Button variant="success" onClick={() => dispatch(setUser())}>set user</Button>
+      <Button variant="danger" onClick={() => dispatch(logoutUser())}>unset user</Button>
+    </>
   )
-}
-
-export const getStaticProps = async () => {
-  const res = await apolloClient.query({
-    query: TEST_QUERY,
-    variables: {
-      name: 'Jarda'
-    }
-  })
-
-  console.log('res', res)
-
-  return {
-    props: {
-      test: 'test'
-    }
-  }
 }
 
 export default Home
