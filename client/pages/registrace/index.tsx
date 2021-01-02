@@ -1,8 +1,11 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Alert, Button, Form, OverlayTrigger, Spinner, Tooltip } from 'react-bootstrap'
 import { apolloClient } from '../../apollo/apollo'
 import { gql } from '@apollo/client'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../../redux/actions'
 
 const REGISTER_USER = gql`
     mutation(
@@ -31,6 +34,17 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [loading, setLoading] = useState(false)
   const [complete, setComplete] = useState(false)
+
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const {
+    loadingFinished,
+    user
+  } = useSelector((state: RootStateOrAny) => state.userState)
+
+  useEffect(() => {
+    dispatch(setUser())
+  }, [])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setErrorMessage('')
@@ -94,6 +108,10 @@ const Register = () => {
         Registrace proběhla úspěšně. Na Váš email byla zaslána zpráva s aktivačním kódem.
       </div>
     )
+  }
+
+  if (loadingFinished && user._id) {
+    router.push('/')
   }
 
   return (

@@ -1,9 +1,11 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Alert, Button, Form, Spinner } from 'react-bootstrap'
 import { apolloClient } from '../../apollo/apollo'
 import { gql } from '@apollo/client'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { setUser } from '../../redux/actions'
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 
 const LOGIN_BY_PASSWORD = gql`
   mutation(
@@ -29,6 +31,15 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
+  const dispatch = useDispatch()
+  const {
+    loadingFinished,
+    user
+  } = useSelector((state: RootStateOrAny) => state.userState)
+
+  useEffect(() => {
+    dispatch(setUser())
+  }, [])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setErrorMessage('')
@@ -73,6 +84,10 @@ const Login = () => {
       }
     }
     setLoading(false)
+  }
+
+  if (loadingFinished && user._id) {
+    router.push('/')
   }
 
   return (
