@@ -4,6 +4,7 @@ import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { logoutUser, setUser } from '../redux/actions'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import LoadingScreen from '../components/LoadingScreen'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -17,8 +18,11 @@ const Home = () => {
     dispatch(setUser())
   }, [])
 
+  if (!loadingFinished) return <LoadingScreen/>
+
   if (loadingFinished && !user._id) {
     router.push('/login')
+    return <LoadingScreen/>
   }
 
   return (
