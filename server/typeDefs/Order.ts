@@ -3,8 +3,8 @@ import { gql } from 'apollo-server-express'
 export default gql`
     type Order {
         _id: ID!
-        user: ID!
-        supplier: ID!
+        user: User!
+        supplier: Supplier!
         name: String
         client: String!
         phone: String

@@ -68,12 +68,18 @@ export class UserService {
 
   async checkUserToken (req: Request, res: Response): Promise<IUserDocument | boolean> {
     try {
-      // @ts-ignore
-      return jwt.verify(req.cookies.userToken, config.get('jwt.secret'))
+      const user: any = jwt.verify(req.cookies.userToken, config.get('jwt.secret'))
+      return user
     } catch (err) {
       res.clearCookie('userToken')
       return false
     }
+  }
+
+  findUserByTokenOrFail (token: string): string {
+    if (!token) throw new Error('user token not provided')
+    const user: any = jwt.verify(token, config.get('jwt.secret'))
+    return user._id
   }
 
   async validateAndPrepareUserData (args: IRegisterUserArgs) {

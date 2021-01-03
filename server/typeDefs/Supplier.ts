@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
     type Supplier {
         _id: ID!
-        user: ID!
+        user: User
         name: String!
         abbreviation: String
     }
