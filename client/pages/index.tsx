@@ -5,6 +5,7 @@ import { logoutUser, setUser } from '../redux/actions'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import LoadingScreen from '../components/LoadingScreen'
+import Layout from '../components/Layout'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -26,14 +27,14 @@ const Home = () => {
   }
 
   return (
-    <>
+    <Layout>
       <Button variant="success" onClick={() => dispatch(setUser())}>set user</Button>
       <Button variant="danger" onClick={() => {
         dispatch(logoutUser())
         location.reload()
       }}>unset user</Button>
       <Link href='/login'><a>Login</a></Link>
-    </>
+    </Layout>
   )
 }
 
