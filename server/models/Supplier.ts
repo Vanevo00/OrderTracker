@@ -4,12 +4,10 @@ import { ISupplierDocument } from '../../types/Supplier'
 const SupplierSchema = new Schema({
   name: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   abbreviation: {
-    type: String,
-    unique: true
+    type: String
   },
   user: {
     type: Schema.Types.ObjectId,
