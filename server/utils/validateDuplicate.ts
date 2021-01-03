@@ -7,7 +7,5 @@ interface Args {
 
 export default async (args: Args): Promise<void> => {
   const duplicateUser = await User.findOne(args)
-
-  console.log(Object.keys(args))
   if (duplicateUser) throw new Error(`Duplicate user key: ${Object.keys(args)}`)
 }
