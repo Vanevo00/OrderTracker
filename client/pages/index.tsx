@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import { Button } from 'react-bootstrap'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
-import { logoutUser, setUser } from '../redux/actions'
-import Link from 'next/link'
+import { setUser } from '../redux/actions'
 import { useRouter } from 'next/router'
 import LoadingScreen from '../components/LoadingScreen'
 import Layout from '../components/Layout'
+import OrderList from '../components/OrderList'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -28,12 +27,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <Button variant="success" onClick={() => dispatch(setUser())}>set user</Button>
-      <Button variant="danger" onClick={() => {
-        dispatch(logoutUser())
-        location.reload()
-      }}>unset user</Button>
-      <Link href='/login'><a>Login</a></Link>
+      <OrderList/>
     </Layout>
   )
 }
