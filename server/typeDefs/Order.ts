@@ -20,10 +20,9 @@ export default gql`
 
     extend type Query {
         findOrdersByUser(
-            user: ID!
             sorting: Sorting
             paginator: Paginator
-        ): Order
+        ): [Order]
     }
 
     extend type Mutation {

@@ -7,6 +7,7 @@ import Sorting from './inputs/Sorting'
 import User from './User'
 import UserActivation from './UserActivation'
 import Order from './Order'
+import Supplier from './Supplier'
 
 export default [
   Date,
@@ -17,5 +18,6 @@ export default [
   Sorting,
   User,
   UserActivation,
-  Order
+  Order,
+  Supplier
 ]
