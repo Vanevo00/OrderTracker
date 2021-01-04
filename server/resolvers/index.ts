@@ -7,6 +7,7 @@ import checkUserToken from './User/checkUserToken'
 import logout from './User/logout'
 import createSupplier from './Supplier/createSupplier'
 import findSuppliersByUser from './Supplier/findSuppliersByUser'
+import deleteSupplier from './Supplier/deleteSupplier'
 
 export default merge(
   findOneUser,
@@ -16,5 +17,6 @@ export default merge(
   loginByPassword,
   logout,
   createSupplier,
+  deleteSupplier,
   findSuppliersByUser
 )

@@ -42,4 +42,17 @@ export class SupplierService {
     if (duplicateName) throw new Error('duplicate name')
     if (duplicateAbbreviation) throw new Error('duplicate abbreviation')
   }
+
+  async delete (_id: string, userToken: string): Promise<boolean> {
+    const [userId, supplier] = await Promise.all([
+      userService.findUserByTokenOrFail(userToken),
+      Supplier.findById(_id).populate('user')
+    ])
+
+    if (!supplier) throw new Error('supplier not found')
+    // @ts-ignore
+    if (userId !== supplier.user._id.toString()) throw new Error('unauthorised')
+    await Supplier.findByIdAndDelete(_id)
+    return true
+  }
 }
