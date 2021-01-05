@@ -22,6 +22,7 @@ export interface IOrder {
 export interface IOrderDocument extends Document, IOrder {}
 
 export interface IOrderArgs {
+  _id?: any
   supplier: IOrder['supplier']
   name?: IOrder['name']
   client: IOrder['client']
