@@ -1,4 +1,5 @@
 import { ISupplierArgs, ISupplierDocument } from '../../types/Supplier'
+import { IUser } from '../../types/User'
 import { UserService } from './User'
 import { Supplier } from '../models/Supplier'
 
@@ -50,8 +51,8 @@ export class SupplierService {
     ])
 
     if (!supplier) throw new Error('supplier not found')
-    // @ts-ignore
-    if (userId !== supplier.user._id.toString()) throw new Error('unauthorised')
+
+    if (typeof supplier.user === 'object' && userId !== supplier.user._id.toString()) throw new Error('unauthorised')
     await Supplier.findByIdAndDelete(_id)
     return true
   }

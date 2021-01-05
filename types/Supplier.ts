@@ -1,9 +1,9 @@
 import { Document } from 'mongoose'
-import { IUser, IUserDocument } from './User'
+import { IUser } from './User'
 
 export interface ISupplier {
   _id?: any
-  user: string
+  user: IUser | string
   name: string
   abbreviation?: string
 }
