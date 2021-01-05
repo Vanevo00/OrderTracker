@@ -23,11 +23,13 @@ const UserSchema = new Schema({
   },
   updated: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: true
   },
   created: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: true
   }
 })
 
