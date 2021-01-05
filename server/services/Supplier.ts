@@ -1,5 +1,4 @@
 import { ISupplierArgs, ISupplierDocument } from '../../types/Supplier'
-import { IUser } from '../../types/User'
 import { UserService } from './User'
 import { Supplier } from '../models/Supplier'
 
