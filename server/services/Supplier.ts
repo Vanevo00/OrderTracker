@@ -52,7 +52,7 @@ export class SupplierService {
     if (!supplier) throw new Error('supplier not found')
 
     if (typeof supplier.user === 'object' && userId !== supplier.user._id.toString()) throw new Error('unauthorised')
-    await Supplier.findByIdAndDelete(_id)
+    await supplier.delete()
     return true
   }
 }

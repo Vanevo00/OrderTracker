@@ -50,7 +50,7 @@ export class OrderService {
     if (!order) throw new Error('order not found')
 
     if (typeof order.user === 'object' && userId !== order.user._id.toString()) throw new Error('unauthorised')
-    await Order.findByIdAndDelete(_id)
+    await order.delete()
     return true
   }
 }
