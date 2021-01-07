@@ -17,7 +17,7 @@ export class OrderService {
     }
   }
 
-  async update (args: IOrderArgs, userToken: string): Promise<IOrderDocument> {
+  async update (args: IOrderArgs, userToken: string): Promise<boolean> {
     try {
       const [userId, order] = await Promise.all([
         userService.findUserByTokenOrFail(userToken),
@@ -26,7 +26,12 @@ export class OrderService {
 
       if (!order) throw new Error('order not found')
       if (typeof order.user === 'object' && userId !== order.user._id.toString()) throw new Error('unauthorised')
-      return order.update(args)
+      await order.updateOne({
+        ...args,
+        updated: new Date().toISOString()
+      })
+
+      return true
     } catch (err) {
       throw new Error(err)
     }
@@ -35,7 +40,7 @@ export class OrderService {
   async findByUser (userToken: string): Promise<IOrderDocument[]> {
     try {
       const userId = userService.findUserByTokenOrFail(userToken)
-      return Order.find({ user: userId }).populate('user')
+      return Order.find({ user: userId }).populate('user').populate('supplier')
     } catch (err) {
       throw new Error(err)
     }

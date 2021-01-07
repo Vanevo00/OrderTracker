@@ -8,6 +8,9 @@ import logout from './User/logout'
 import createSupplier from './Supplier/createSupplier'
 import findSuppliersByUser from './Supplier/findSuppliersByUser'
 import deleteSupplier from './Supplier/deleteSupplier'
+import createOrder from './Order/createOrder'
+import findOrdersByUser from './Order/findOrdersByUser'
+import updateOrder from './Order/updateOrder'
 
 export default merge(
   findOneUser,
@@ -18,5 +21,8 @@ export default merge(
   logout,
   createSupplier,
   deleteSupplier,
-  findSuppliersByUser
+  findSuppliersByUser,
+  createOrder,
+  updateOrder,
+  findOrdersByUser
 )

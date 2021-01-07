@@ -53,7 +53,7 @@ export default gql`
             pickedUp: Boolean
             toBeReadyOn: Date
             created: Date
-        ): Order
+        ): Boolean
         
         deleteOrder(
             _id: ID!
