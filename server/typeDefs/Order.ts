@@ -13,7 +13,7 @@ export default gql`
         notes: String
         smsSent: Boolean
         pickedUp: Boolean
-        toBeReadyOn: Date
+        toBeReadyOn: String
         updated: Date!
         created: Date!
     }
@@ -36,7 +36,7 @@ export default gql`
             notes: String
             smsSent: Boolean
             pickedUp: Boolean
-            toBeReadyOn: Date
+            toBeReadyOn: String
             created: Date
         ): Order
         
@@ -51,7 +51,7 @@ export default gql`
             notes: String
             smsSent: Boolean
             pickedUp: Boolean
-            toBeReadyOn: Date
+            toBeReadyOn: String
             created: Date
         ): Boolean
         
