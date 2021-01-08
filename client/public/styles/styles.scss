@@ -1,7 +1,9 @@
-.main {
+$main: #79a9e7;
+
+.main-background {
   width: 100%;
   min-height: 100vh;
-  background-color: #343A40;
+  background-color: $main;
 }
 
 .center-content {

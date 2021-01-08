@@ -15,9 +15,7 @@ const OrderTracker: FC<AppProps> = ({ Component, pageProps }) => {
         <title>Správce objednávek</title>
       </Head>
       <Provider store={store}>
-        <div className='main'>
-          <Component {...pageProps} />
-        </div>
+      <Component {...pageProps} />
       </Provider>
     </>
   )
