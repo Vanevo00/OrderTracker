@@ -1,4 +1,3 @@
-import { IOrderArgs } from '../../../types/Order'
 import { IContext } from '../../../types/Context'
 import { OrderService } from '../../services/Order'
 
@@ -6,7 +5,7 @@ const orderService = new OrderService()
 
 export default {
   Mutation: {
-    updateOrder: async (_: undefined, args: IOrderArgs, ctx: IContext): Promise<boolean> => {
+    deleteOrder: async (_: undefined, _id: string, ctx: IContext): Promise<boolean> => {
       const {
         req: {
           cookies: {
@@ -14,7 +13,7 @@ export default {
           }
         }
       } = ctx
-      return await orderService.update(args, userToken)
+      return await orderService.delete(_id, userToken)
     }
   }
 }
