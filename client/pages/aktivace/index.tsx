@@ -29,7 +29,7 @@ const Activate = ({ success, error }: Props) => {
 
   if (error || !success) {
     return (
-      <div className='center-content text-white text-center'>
+      <div className='main-background center-content text-white text-center'>
         <Alert variant='danger'>
           <Alert.Heading>Vyskytla se chyba!</Alert.Heading>
           {error}<Alert.Link href='/'> Zpět na hlavní stránku</Alert.Link>

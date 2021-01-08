@@ -104,7 +104,7 @@ const Register = () => {
 
   if (complete) {
     return (
-      <div className='center-content text-white text-center'>
+      <div className='main-background center-content text-white text-center'>
         Registrace proběhla úspěšně. Na Váš email byla zaslána zpráva s aktivačním kódem.
       </div>
     )
