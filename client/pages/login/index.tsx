@@ -4,7 +4,7 @@ import { apolloClient } from '../../apollo/apollo'
 import { gql } from '@apollo/client'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { setUser } from '../../redux/actions'
+import { setUser } from '../../redux/userActions'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 
 const LOGIN_BY_PASSWORD = gql`
