@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row } from 'react-bootstrap'
+import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../redux/actions'
 import { useRouter } from 'next/router'
@@ -17,9 +17,15 @@ const MainMenu = () => {
   }
 
   return (
-    <Row>
-      <div className='main-menu min-100-vh dark-background'>pes</div>
-    </Row>
+    <Navbar bg='dark' variant='dark'>
+      <Nav>
+        <NavDropdown title={user.email} id='user-dropdown'>
+          <NavDropdown.Item onClick={onLogout}>Odhlásit se</NavDropdown.Item>
+        </NavDropdown>
+        <Button size="sm" variant="success" className='ml-5 rounded-pill'>+ Nová zakázka</Button>
+      </Nav>
+
+    </Navbar>
   )
 }
 

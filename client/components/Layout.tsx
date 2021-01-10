@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap'
 
 const Layout: FunctionComponent = ({ children }) => {
   return (
-    <Container fluid>
+    <Container fluid className='p-0'>
       <MainMenu/>
       { children }
     </Container>
