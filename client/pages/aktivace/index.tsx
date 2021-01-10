@@ -29,7 +29,7 @@ const Activate = ({ success, error }: Props) => {
 
   if (error || !success) {
     return (
-      <div className='main-background center-content text-white text-center'>
+      <div className='main-background center-content full-screen text-white text-center'>
         <Alert variant='danger'>
           <Alert.Heading>Vyskytla se chyba!</Alert.Heading>
           {error}<Alert.Link href='/'> Zpět na hlavní stránku</Alert.Link>
@@ -45,7 +45,7 @@ const Activate = ({ success, error }: Props) => {
   }, [])
 
   return (
-      <div className='center-content text-white text-center'>
+      <div className='center-content text-white text-center full-screen main-background'>
         Aktivace proběhla úspěšně. Za okamžik budete přesměrováni na přihlašovací stránku.
       </div>
   )

@@ -1,23 +1,28 @@
-.main-background {
-  width: 100%;
-  min-height: 100vh;
-  background-color: #79a9e7;
-}
-
-.center-content {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.white-form {
+.white-background {
   background-color: #fff;
 }
 
-.pointer {
-  cursor: pointer;
+.dark-background {
+  background-color: #000000;
+}
+
+.main-background {
+  background-color: #79a9e7;
+}
+
+.min-100-vh {
+  min-height: 100vh;
+}
+
+.full-screen {
+  width: 100%;
+  height: 100vh;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (min-width: 600px) {
@@ -31,6 +36,10 @@
     width: 100%;
     height: 100%;
   }
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styles.css.map */

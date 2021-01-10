@@ -104,7 +104,7 @@ const Register = () => {
 
   if (complete) {
     return (
-      <div className='main-background center-content text-white text-center'>
+      <div className='main-background full-screen center-content text-white text-center'>
         Registrace proběhla úspěšně. Na Váš email byla zaslána zpráva s aktivačním kódem.
       </div>
     )
@@ -115,8 +115,8 @@ const Register = () => {
   }
 
   return (
-        <div className='main-background center-content'>
-            <Form className='white-form p-4 shadow responsive-form' onSubmit={onSubmit} >
+        <div className='main-background center-content full-screen'>
+            <Form className='white-background p-4 shadow responsive-form' onSubmit={onSubmit} >
                 <h1 className="h3 mb-3 fw-normal">Registrace</h1>
                 <Form.Group>
                     <Form.Label>Uživatelské jméno</Form.Label>

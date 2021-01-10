@@ -4,7 +4,6 @@ import { setUser } from '../redux/actions'
 import { useRouter } from 'next/router'
 import LoadingScreen from '../components/LoadingScreen'
 import Layout from '../components/Layout'
-import OrderList from '../components/OrderList'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -27,7 +26,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <OrderList/>
+      pes
     </Layout>
   )
 }

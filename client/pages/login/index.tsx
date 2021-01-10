@@ -91,8 +91,8 @@ const Login = () => {
   }
 
   return (
-      <div className='main-background center-content'>
-        <Form className='white-form p-4 shadow responsive-form' onSubmit={onSubmit} >
+      <div className='main-background full-screen center-content'>
+        <Form className='white-background p-4 shadow responsive-form' onSubmit={onSubmit} >
           <h1 className="h3 mb-3 fw-normal">Přihlášení</h1>
           <Form.Group>
             <Form.Label>Email</Form.Label>
