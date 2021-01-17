@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import OrderItem from './OrderItem'
 import { RootStateOrAny, useSelector } from 'react-redux'
+import { IOrder } from '../../types/Order'
 
 const OrderItems = () => {
-  const { user } = useSelector((state: RootStateOrAny) => state.userState)
-
-  useEffect(() => {
-
-  }, [])
+  const {
+    orders
+  } = useSelector((state: RootStateOrAny) => state.orderState)
 
   return (
     <>
-      <OrderItem title='test1'/>
-      <OrderItem title='test2'/>
+      {
+        orders.map((order: IOrder) => <OrderItem title={order.client}/>)
+      }
     </>
   )
 }
