@@ -40,6 +40,9 @@ const OrderSchema = new Schema({
   toBeReadyOn: {
     type: Date
   },
+  orderedOn: {
+    type: Date
+  },
   updated: {
     type: Date,
     required: true,

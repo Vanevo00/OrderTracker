@@ -15,6 +15,7 @@ export interface IOrder {
   smsSent?: boolean
   pickedUp?: boolean
   toBeReadyOn?: string
+  orderedOn?: string
   updated?: string
   created?: string
 }
@@ -33,4 +34,5 @@ export interface IOrderArgs {
   smsSent?: IOrder['smsSent']
   pickedUp?: IOrder['pickedUp']
   toBeReadyOn?: IOrder['toBeReadyOn']
+  orderedOn?: IOrder['orderedOn']
 }
