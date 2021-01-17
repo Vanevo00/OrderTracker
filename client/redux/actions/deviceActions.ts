@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux'
-import * as types from './types'
+import * as types from '../types'
 
 export const setDevice = (deviceWidth: number) => (dispatch: Dispatch) => {
   dispatch({

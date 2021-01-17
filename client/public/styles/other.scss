@@ -4,4 +4,6 @@
 
 .order-list {
   border-right: solid 1px $darkGray;
+  display: flex;
+  flex-direction: column;
 }

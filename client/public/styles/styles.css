@@ -48,6 +48,8 @@
 
 .order-list {
   border-right: solid 1px #dcdcdc;
+  display: flex;
+  flex-direction: column;
 }
 
 /*# sourceMappingURL=styles.css.map */

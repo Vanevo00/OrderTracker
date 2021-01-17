@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
-import { logoutUser } from '../redux/userActions'
+import { logoutUser } from '../redux/actions/userActions'
 import { useRouter } from 'next/router'
 
 const MainMenu = () => {

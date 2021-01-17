@@ -1,7 +1,7 @@
-import * as types from './types'
+import * as types from '../types'
 import { Dispatch } from 'redux'
 import { gql } from '@apollo/client'
-import { apolloClient } from '../apollo/apollo'
+import { apolloClient } from '../../apollo/apollo'
 
 const CHECK_USER_TOKEN = gql`
   query {

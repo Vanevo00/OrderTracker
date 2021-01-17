@@ -5,7 +5,7 @@ import { gql } from '@apollo/client'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
-import { setUser } from '../../redux/userActions'
+import { setUser } from '../../redux/actions/userActions'
 
 const REGISTER_USER = gql`
     mutation(

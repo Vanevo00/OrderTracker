@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setUser } from '../../redux/userActions'
-import { setDevice } from '../../redux/deviceActions'
+import { setUser } from '../../redux/actions/userActions'
+import { setDevice } from '../../redux/actions/deviceActions'
 
 const useGetInitialStateValues = () => {
   const dispatch = useDispatch()
