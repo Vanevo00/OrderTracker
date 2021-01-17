@@ -20,6 +20,11 @@ export interface IOrder {
   created?: string
 }
 
+export interface IOrderPopulated extends IOrder {
+  user: IUser
+  supplier: ISupplier
+}
+
 export interface IOrderDocument extends Document, IOrder {}
 
 export interface IOrderArgs {

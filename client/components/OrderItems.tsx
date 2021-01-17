@@ -1,7 +1,7 @@
 import React from 'react'
 import OrderItem from './OrderItem'
 import { RootStateOrAny, useSelector } from 'react-redux'
-import { IOrder } from '../../types/Order'
+import { IOrderPopulated } from '../../types/Order'
 
 const OrderItems = () => {
   const {
@@ -11,7 +11,7 @@ const OrderItems = () => {
   return (
     <>
       {
-        orders.map((order: IOrder) => <OrderItem title={order.client}/>)
+        orders.map((order: IOrderPopulated) => <OrderItem order={order} key={order._id}/>)
       }
     </>
   )
