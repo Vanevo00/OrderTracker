@@ -11,7 +11,7 @@ const OrderItems = () => {
   return (
     <>
       {
-        orders.map((order: IOrderPopulated) => <OrderItem order={order} key={order._id}/>)
+        orders.map((order: IOrderPopulated) => <OrderItem order={order} key={order._id} />)
       }
     </>
   )

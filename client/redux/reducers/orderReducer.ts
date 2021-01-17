@@ -7,7 +7,8 @@ interface orderReducerArgs {
 
 const initialOrderState = {
   loadingOrders: true,
-  orders: []
+  orders: [],
+  activeOrder: undefined
 }
 
 export const orderReducer = (state = initialOrderState, { type, payload }: orderReducerArgs) => {
@@ -17,6 +18,11 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
         ...state,
         orders: payload,
         loadingOrders: false
+      }
+    case types.SET_ACTIVE_ORDER:
+      return {
+        ...state,
+        activeOrder: payload
       }
     default:
       return state

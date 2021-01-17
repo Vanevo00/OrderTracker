@@ -2,6 +2,7 @@ import { Dispatch } from 'redux'
 import * as types from '../types'
 import { apolloClient } from '../../apollo/apollo'
 import { gql } from '@apollo/client'
+import { IOrderPopulated } from '../../../types/Order'
 
 const GET_ORDERS = gql`
     query {
@@ -37,6 +38,13 @@ export const setOrders = () => async (dispatch: Dispatch) => {
 
   dispatch({
     type: types.SET_ORDERS,
+    payload
+  })
+}
+
+export const setActiveOrder = (payload: IOrderPopulated) => (dispatch: Dispatch) => {
+  dispatch({
+    type: types.SET_ACTIVE_ORDER,
     payload
   })
 }
