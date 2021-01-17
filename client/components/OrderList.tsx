@@ -1,17 +1,11 @@
 import React from 'react'
-import { Container, ListGroup, Row } from 'react-bootstrap'
-import OrderItem from './OrderItem'
+import { Col } from 'react-bootstrap'
 
 const OrderList = () => {
   return (
-    <Container>
-      <Row>
-        <OrderItem active={false} title='1'/>
-        <OrderItem active={true} title='2'/>
-        <OrderItem active={false} title='3'/>
-      </Row>
-    </Container>
-
+    <Col xl={3} md={4} sm={5} xs={12} className='light-background height-remainder order-list'>
+      <div></div>
+    </Col>
   )
 }
 

@@ -2,8 +2,8 @@
   background-color: #fff;
 }
 
-.dark-background {
-  background-color: #000000;
+.light-background {
+  background-color: #f8f8f8;
 }
 
 .main-background {
@@ -38,8 +38,16 @@
   }
 }
 
+.height-remainder {
+  min-height: calc(100vh - 56px);
+}
+
 .pointer {
   cursor: pointer;
+}
+
+.order-list {
+  border-right: solid 1px #dcdcdc;
 }
 
 /*# sourceMappingURL=styles.css.map */

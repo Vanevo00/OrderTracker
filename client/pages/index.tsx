@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import LoadingScreen from '../components/LoadingScreen'
 import Layout from '../components/Layout'
 import useGetInitialStateValues from '../components/hooks/useGetInitialStateValues'
+import OrderList from '../components/OrderList'
+import { Row } from 'react-bootstrap'
 
 const Home = () => {
   useGetInitialStateValues()
@@ -22,7 +24,7 @@ const Home = () => {
 
   return (
     <Layout>
-      pes
+      <OrderList/>
     </Layout>
   )
 }
