@@ -6,7 +6,7 @@ export interface IOrder {
   _id?: any
   user: IUser | string
   supplier: ISupplier | string
-  name?: string
+  name: string
   client: string
   phone?: string
   email?: string
@@ -25,7 +25,7 @@ export interface IOrderDocument extends Document, IOrder {}
 export interface IOrderArgs {
   _id?: any
   supplier: IOrder['supplier']
-  name?: IOrder['name']
+  name: IOrder['name']
   client: IOrder['client']
   phone?: IOrder['phone']
   email?: IOrder['email']
