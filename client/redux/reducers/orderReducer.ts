@@ -1,4 +1,5 @@
 import * as types from '../types'
+import { NO_USER_FOR_ORDERS } from '../types'
 
 interface orderReducerArgs {
   type: string
@@ -24,6 +25,7 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
         ...state,
         activeOrder: payload
       }
+    case NO_USER_FOR_ORDERS:
     default:
       return state
   }

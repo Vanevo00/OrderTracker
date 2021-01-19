@@ -28,18 +28,24 @@ const GET_ORDERS = gql`
 `
 
 export const setOrders = () => async (dispatch: Dispatch) => {
-  const {
-    data: {
-      findOrdersByUser: payload
-    }
-  } = await apolloClient.query({
-    query: GET_ORDERS
-  })
+  try {
+    const {
+      data: {
+        findOrdersByUser: payload
+      }
+    } = await apolloClient.query({
+      query: GET_ORDERS
+    })
 
-  dispatch({
-    type: types.SET_ORDERS,
-    payload
-  })
+    dispatch({
+      type: types.SET_ORDERS,
+      payload
+    })
+  } catch {
+    dispatch({
+      type: types.NO_USER_FOR_ORDERS
+    })
+  }
 }
 
 export const setActiveOrder = (payload: IOrderPopulated) => (dispatch: Dispatch) => {
