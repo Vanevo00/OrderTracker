@@ -1,5 +1,6 @@
 import { RootStateOrAny, useSelector } from 'react-redux'
 import React from 'react'
+import OrderMainTitle from './OrderMainTitle'
 
 const MainContent = () => {
   const {
@@ -12,18 +13,10 @@ const MainContent = () => {
     return null
   }
 
-  if (activeOrder) {
-    return (
-      <p>
-        {activeOrder.name}
-      </p>
-    )
-  }
-
   return (
-    <p>
-      {orders[0].name}
-    </p>
+    <>
+      <OrderMainTitle order={activeOrder || orders[0]}/>
+    </>
   )
 }
 
