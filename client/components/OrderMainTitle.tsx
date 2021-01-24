@@ -1,12 +1,14 @@
 import React from 'react'
 import { IOrderPopulated } from '../../types/Order'
 import getShortDate from '../utils/getShortDate'
+import { RootStateOrAny, useSelector } from 'react-redux'
 
-interface Props {
-  order: IOrderPopulated
-}
+const OrderMainTitle = () => {
+  const {
+    activeOrder,
+    orderSaveStatus
+  } = useSelector((state: RootStateOrAny) => state.orderState)
 
-const OrderMainTitle = ({ order }: Props) => {
   const generateMainTitle = (order: IOrderPopulated) => {
     const created = order.created ? `${getShortDate(order.created)}/` : ''
     const supplier = order.supplier.abbreviation ? `${order.supplier.abbreviation}/` : `${order.supplier.name}/`
@@ -17,7 +19,10 @@ const OrderMainTitle = ({ order }: Props) => {
   }
 
   return (
-    <h3><strong>{generateMainTitle(order)}</strong></h3>
+    <div>
+      <h3 className='m-0 small-line-height'><strong>{generateMainTitle(activeOrder)}</strong></h3>
+      <p className='gray-font'><small>{orderSaveStatus ? orderSaveStatus : `poslední aktualizace: ${getShortDate(activeOrder.updated)}`}</small></p>
+    </div>
   )
 }
 

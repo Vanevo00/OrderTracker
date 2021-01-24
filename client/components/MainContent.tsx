@@ -1,12 +1,11 @@
 import { RootStateOrAny, useSelector } from 'react-redux'
 import React from 'react'
 import OrderMainTitle from './OrderMainTitle'
+import OrderForm from './OrderForm'
 
 const MainContent = () => {
   const {
-    loadingOrders,
-    activeOrder,
-    orders
+    loadingOrders
   } = useSelector((state: RootStateOrAny) => state.orderState)
 
   if (loadingOrders) {
@@ -15,7 +14,8 @@ const MainContent = () => {
 
   return (
     <>
-      <OrderMainTitle order={activeOrder || orders[0]}/>
+      <OrderMainTitle/>
+      <OrderForm/>
     </>
   )
 }
