@@ -3,25 +3,44 @@ import { Form } from 'react-bootstrap'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { saveUpdatedOrder, updateActiveOrder } from '../redux/actions/orderActions'
 import OrderFormInput from './OrderFormInput'
+import OrderFormSelect from './OrderFormSelect'
+import { ISupplier } from '../../types/Supplier'
 
 const OrderForm = () => {
   const dispatch = useDispatch()
   const {
-    activeOrder,
-    userStartedTyping
-  } = useSelector((state: RootStateOrAny) => state.orderState)
+    orderState: {
+      activeOrder,
+      userStartedTyping
+    },
+    supplierState: {
+      suppliers
+    }
+  } = useSelector((state: RootStateOrAny) => state)
 
   const {
     name,
     client,
     phone,
-    email
+    email,
+    supplier
   } = activeOrder
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const updatedOrder = {
       ...activeOrder,
       [e.target.name]: e.target.value
+    }
+
+    dispatch(updateActiveOrder(updatedOrder))
+  }
+
+  const onSupplierChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const selectedSupplier = suppliers.filter((supplier: ISupplier) => supplier._id === e.target.value)[0]
+
+    const updatedOrder = {
+      ...activeOrder,
+      supplier: selectedSupplier
     }
 
     dispatch(updateActiveOrder(updatedOrder))
@@ -35,8 +54,6 @@ const OrderForm = () => {
       return () => clearTimeout(timeoutId)
     }
   }, [activeOrder])
-
-  console.log('phone', phone)
 
   return (
     <Form className='mt-3'>
@@ -67,6 +84,13 @@ const OrderForm = () => {
         name='email'
         value={email || ''}
         onChange={onChange}
+      />
+      <OrderFormSelect
+        label='dodavatel'
+        name='supplier'
+        options={suppliers}
+        value={supplier._id || undefined}
+        onChange={onSupplierChange}
       />
     </Form>
   )

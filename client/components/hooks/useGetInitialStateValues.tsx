@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { setUser } from '../../redux/actions/userActions'
 import { setDevice } from '../../redux/actions/deviceActions'
 import { setOrders } from '../../redux/actions/orderActions'
+import { setSuppliers } from '../../redux/actions/supplierActions'
 
 const useGetInitialStateValues = () => {
   const dispatch = useDispatch()
@@ -12,7 +13,8 @@ const useGetInitialStateValues = () => {
       await Promise.all([
         dispatch(setUser()),
         dispatch(setDevice(window.innerWidth)),
-        dispatch(setOrders())
+        dispatch(setOrders()),
+        dispatch(setSuppliers())
       ])
     }
 

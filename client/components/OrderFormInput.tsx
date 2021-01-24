@@ -9,11 +9,6 @@ interface Props {
 }
 
 const OrderFormInput = ({ label, type, name, value, onChange }: Props) => {
-  console.log({
-    name,
-    value
-  })
-
   return (
     <div className='d-flex'>
       <label className='order-form-label' htmlFor={name}><strong>{label}:</strong></label>
