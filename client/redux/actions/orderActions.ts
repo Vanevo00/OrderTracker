@@ -1,49 +1,10 @@
 import { Dispatch } from 'redux'
 import * as types from '../types'
 import { apolloClient } from '../../apollo/apollo'
-import { gql } from '@apollo/client'
 import { IOrderPopulated } from '../../../types/Order'
 import getCurrentTime from '../../utils/getCurrentTime'
-
-const GET_ORDERS = gql`
-  query {
-    findOrdersByUser {
-      _id
-      supplier {
-        _id
-        name
-        abbreviation
-      }
-      name
-      client
-      phone
-      email
-      product
-      notes
-      smsSent
-      pickedUp
-      toBeReadyOn
-      updated
-      created
-    }
-}
-`
-
-const UPDATE_ORDER = gql`
-    mutation (
-        $_id: ID!
-        $supplier: ID!
-        $name: String!
-        $client: String!
-    ) {
-        updateOrder(
-            _id: $_id
-            supplier: $supplier
-            name: $name
-            client: $client
-        )
-    }
-`
+import { UPDATE_ORDER } from '../../apollo/mutations/updateOrder'
+import { GET_ORDERS } from '../../apollo/queries/getOrders'
 
 export const setOrders = () => async (dispatch: Dispatch) => {
   try {

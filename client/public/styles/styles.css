@@ -51,6 +51,13 @@
   height: 100%;
 }
 
+.order-form-input {
+  border: none;
+}
+.order-form-input:focus {
+  outline: none;
+}
+
 .pointer {
   cursor: pointer;
 }

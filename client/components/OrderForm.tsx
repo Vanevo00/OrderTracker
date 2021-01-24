@@ -2,17 +2,20 @@ import React, { ChangeEvent, useEffect } from 'react'
 import { Form } from 'react-bootstrap'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { saveUpdatedOrder, updateActiveOrder } from '../redux/actions/orderActions'
+import OrderFormInput from './OrderFormInput'
 
 const OrderForm = () => {
   const dispatch = useDispatch()
   const {
     activeOrder,
-    userStartedTyping,
-    orderSaveStatus
+    userStartedTyping
   } = useSelector((state: RootStateOrAny) => state.orderState)
 
   const {
-    name
+    name,
+    client,
+    phone,
+    email
   } = activeOrder
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,12 +36,38 @@ const OrderForm = () => {
     }
   }, [activeOrder])
 
+  console.log('phone', phone)
+
   return (
     <Form className='mt-3'>
-      <Form.Group controlId='formBasicEmail'>
-        <Form.Label>Jméno objednávky</Form.Label>
-        <Form.Control type='text' placeholder='např. diamantový prsten' name='name' value={name} onChange={onChange}/>
-      </Form.Group>
+      <OrderFormInput
+        label='název objednávky'
+        type='text'
+        name='name'
+        value={name || ''}
+        onChange={onChange}
+      />
+      <OrderFormInput
+        label='klient'
+        type='text'
+        name='client'
+        value={client || ''}
+        onChange={onChange}
+      />
+      <OrderFormInput
+        label='telefon'
+        type='tel'
+        name='phone'
+        value={phone || ''}
+        onChange={onChange}
+      />
+      <OrderFormInput
+        label='e-mail'
+        type='email'
+        name='email'
+        value={email || ''}
+        onChange={onChange}
+      />
     </Form>
   )
 }

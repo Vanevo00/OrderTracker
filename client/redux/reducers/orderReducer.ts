@@ -1,5 +1,5 @@
 import * as types from '../types'
-import { NO_USER_FOR_ORDERS, ORDER_IS_SAVING, ORDER_SAVED } from '../types'
+import { NO_USER_FOR_ORDERS, ORDER_SAVED } from '../types'
 import { IOrderPopulated } from '../../../types/Order'
 
 interface orderReducerArgs {
@@ -10,7 +10,9 @@ interface orderReducerArgs {
 const initialOrderState = {
   loadingOrders: true,
   orders: [],
-  activeOrder: undefined,
+  activeOrder: {
+    phone: undefined
+  },
   userStartedTyping: false,
   orderSaveStatus: undefined
 }
