@@ -6,7 +6,8 @@ interface supplierReducerArgs {
 }
 
 const initialSupplierState = {
-  suppliers: []
+  suppliers: [],
+  showSupplierModal: false
 }
 
 export const supplierReducer = (state = initialSupplierState, { type, payload }: supplierReducerArgs) => {
@@ -15,6 +16,25 @@ export const supplierReducer = (state = initialSupplierState, { type, payload }:
       return {
         ...state,
         suppliers: payload
+      }
+    case types.SHOW_SUPPLIER_MODAL:
+      return {
+        ...state,
+        showSupplierModal: true
+      }
+    case types.HIDE_SUPPLIER_MODAL:
+      return {
+        ...state,
+        showSupplierModal: false
+      }
+    case types.SUPPLIER_ADDED:
+      return {
+        ...state,
+        showSupplierModal: false,
+        suppliers: [
+          ...state.suppliers,
+          payload
+        ]
       }
     default:
       return state

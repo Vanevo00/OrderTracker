@@ -5,6 +5,8 @@ import { saveUpdatedOrder, updateActiveOrder } from '../redux/actions/orderActio
 import OrderFormInput from './OrderFormInput'
 import OrderFormSelect from './OrderFormSelect'
 import { ISupplier } from '../../types/Supplier'
+import AddSupplierModal from './AddSupplierModal'
+import { showSupplierModal } from '../redux/actions/supplierActions'
 
 const OrderForm = () => {
   const dispatch = useDispatch()
@@ -36,6 +38,11 @@ const OrderForm = () => {
   }
 
   const onSupplierChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value === 'addSupplier') {
+      dispatch(showSupplierModal)
+      return
+    }
+
     const selectedSupplier = suppliers.filter((supplier: ISupplier) => supplier._id === e.target.value)[0]
 
     const updatedOrder = {
@@ -56,43 +63,50 @@ const OrderForm = () => {
   }, [activeOrder])
 
   return (
-    <Form className='mt-3'>
-      <OrderFormInput
-        label='název objednávky'
-        type='text'
-        name='name'
-        value={name || ''}
-        onChange={onChange}
-      />
-      <OrderFormInput
-        label='klient'
-        type='text'
-        name='client'
-        value={client || ''}
-        onChange={onChange}
-      />
-      <OrderFormInput
-        label='telefon'
-        type='tel'
-        name='phone'
-        value={phone || ''}
-        onChange={onChange}
-      />
-      <OrderFormInput
-        label='e-mail'
-        type='email'
-        name='email'
-        value={email || ''}
-        onChange={onChange}
-      />
-      <OrderFormSelect
-        label='dodavatel'
-        name='supplier'
-        options={suppliers}
-        value={supplier._id || undefined}
-        onChange={onSupplierChange}
-      />
-    </Form>
+    <>
+      <Form className='mt-3'>
+        <OrderFormInput
+          label='název objednávky'
+          type='text'
+          name='name'
+          value={name || ''}
+          onChange={onChange}
+        />
+        <OrderFormInput
+          label='klient'
+          type='text'
+          name='client'
+          value={client || ''}
+          onChange={onChange}
+        />
+        <OrderFormInput
+          label='telefon'
+          type='tel'
+          name='phone'
+          value={phone || ''}
+          onChange={onChange}
+        />
+        <OrderFormInput
+          label='e-mail'
+          type='email'
+          name='email'
+          value={email || ''}
+          onChange={onChange}
+        />
+        <OrderFormSelect
+          label='dodavatel'
+          name='supplier'
+          options={suppliers}
+          extraOptions={[{
+            name: 'přidat nového dodavatele',
+            value: 'addSupplier'
+          }]}
+          value={supplier._id || undefined}
+          onChange={onSupplierChange}
+        />
+      </Form>
+      <AddSupplierModal/>
+    </>
   )
 }
 

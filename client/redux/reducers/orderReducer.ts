@@ -1,5 +1,4 @@
 import * as types from '../types'
-import { NO_USER_FOR_ORDERS, ORDER_SAVED } from '../types'
 import { IOrderPopulated } from '../../../types/Order'
 
 interface orderReducerArgs {
@@ -51,12 +50,20 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
         orders: updateActiveOrderInOrders(state.orders, payload),
         orderSaveStatus: 'ukládám...'
       }
-    case ORDER_SAVED:
+    case types.ORDER_SAVED:
       return {
         ...state,
         orderSaveStatus: `uloženo v ${payload}`
       }
-    case NO_USER_FOR_ORDERS:
+    case types.SUPPLIER_ADDED:
+      return {
+        ...state,
+        activeOrder: {
+          ...state.activeOrder,
+          supplier: payload
+        }
+      }
+    case types.NO_USER_FOR_ORDERS:
     default:
       return state
   }
