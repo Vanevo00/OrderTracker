@@ -3,14 +3,17 @@ import { UserService } from './User'
 import { Supplier } from '../models/Supplier'
 import { DefaultSorting, ISorting } from '../../types/Sorting'
 import prepareSortingObject from '../utils/prepareSortingObject'
+import validator from 'validator'
+import { Response } from 'express'
+import isEmpty from '../utils/isEmpty'
 
 const userService = new UserService()
 
 export class SupplierService {
-  async create (args: ISupplierArgs, userToken: string): Promise<ISupplierDocument> {
+  async create (args: ISupplierArgs, userToken: string, res: Response): Promise<ISupplierDocument> {
     try {
       const user = userService.findUserByTokenOrFail(userToken)
-      await this.validateSupplier(args, user)
+      await this.validateSupplier(args, user, res)
       return Supplier.create({
         user,
         ...args
@@ -36,8 +39,12 @@ export class SupplierService {
     }
   }
 
-  async validateSupplier (args: ISupplierArgs, user: string) {
-    const [duplicateName, duplicateAbbreviation] = await Promise.all([
+  async validateSupplier (args: ISupplierArgs, user: string, res: Response) {
+    const errors: {
+      name?: string
+      abbreviation?: string
+    } = {}
+    const [duplicitName, duplicitAbbreviation] = await Promise.all([
       Supplier.findOne({
         name: args.name,
         user
@@ -48,8 +55,11 @@ export class SupplierService {
       })
     ])
 
-    if (duplicateName) throw new Error('duplicate name')
-    if (duplicateAbbreviation) throw new Error('duplicate abbreviation')
+    if (duplicitName) errors.name = 'duplicit'
+    if (duplicitAbbreviation) errors.abbreviation = 'duplicit'
+    if (validator.isEmpty(args.name)) errors.name = 'empty'
+
+    if (!isEmpty(errors)) return res.status(400).json(errors)
   }
 
   async delete (_id: string, userToken: string): Promise<boolean> {
