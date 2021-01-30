@@ -12,7 +12,12 @@ export const setSuppliers = () => async (dispatch: Dispatch) => {
         findSuppliersByUser: payload
       }
     } = await apolloClient.query({
-      query: GET_SUPPLIERS
+      query: GET_SUPPLIERS,
+      variables: {
+        sorting: {
+          key: 'name'
+        }
+      }
     })
 
     dispatch({

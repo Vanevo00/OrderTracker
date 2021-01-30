@@ -1,6 +1,8 @@
 import { ISupplierArgs, ISupplierDocument } from '../../types/Supplier'
 import { UserService } from './User'
 import { Supplier } from '../models/Supplier'
+import { DefaultSorting, ISorting } from '../../types/Sorting'
+import prepareSortingObject from '../utils/prepareSortingObject'
 
 const userService = new UserService()
 
@@ -18,10 +20,17 @@ export class SupplierService {
     }
   }
 
-  async findByUser (userToken: string): Promise<ISupplierDocument[]> {
+  async findByUser (
+    userToken: string,
+    sorting: ISorting = DefaultSorting
+  ): Promise<ISupplierDocument[]> {
     try {
       const user = userService.findUserByTokenOrFail(userToken)
-      return Supplier.find({ user }).populate('user')
+      return Supplier
+        .find({ user })
+        .collation({ locale: 'en' }) // necessary for case insensitive sorting
+        .sort(prepareSortingObject(sorting))
+        .populate('user')
     } catch (err) {
       throw new Error(err)
     }

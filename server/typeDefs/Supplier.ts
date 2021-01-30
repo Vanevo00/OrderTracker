@@ -9,7 +9,9 @@ export default gql`
     }
 
     extend type Query {
-        findSuppliersByUser: [Supplier]
+        findSuppliersByUser(
+            sorting: Sorting
+        ): [Supplier]
     }
 
     extend type Mutation {

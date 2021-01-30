@@ -1,8 +1,12 @@
 import { gql } from '@apollo/client'
 
 export const GET_SUPPLIERS = gql`
-    query {
-        findSuppliersByUser {
+    query (
+        $sorting: Sorting
+    ) {
+        findSuppliersByUser (
+            sorting: $sorting
+        ) {
             _id
             abbreviation
             name
