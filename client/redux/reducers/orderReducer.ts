@@ -16,7 +16,7 @@ const initialOrderState = {
   orderSaveStatus: undefined
 }
 
-const updateActiveOrderInOrders = (orders: IOrderPopulated[], payload: IOrderPopulated) => {
+const updateActiveOrderInOrders = (orders: IOrderPopulated[], payload: any) => {
   return orders.map((order) => {
     if (order._id === payload._id) {
       return payload
@@ -61,7 +61,12 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
         activeOrder: {
           ...state.activeOrder,
           supplier: payload
-        }
+        },
+        orders: updateActiveOrderInOrders(state.orders, {
+          ...state.activeOrder,
+          supplier: payload
+        }),
+        userStartedTyping: true
       }
     case types.NO_USER_FOR_ORDERS:
     default:
