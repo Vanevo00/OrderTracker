@@ -4,23 +4,19 @@ import { Supplier } from '../models/Supplier'
 import { DefaultSorting, ISorting } from '../../types/Sorting'
 import prepareSortingObject from '../utils/prepareSortingObject'
 import validator from 'validator'
-import { Response } from 'express'
 import isEmpty from '../utils/isEmpty'
+import { UserInputError } from 'apollo-server-express'
 
 const userService = new UserService()
 
 export class SupplierService {
-  async create (args: ISupplierArgs, userToken: string, res: Response): Promise<ISupplierDocument> {
-    try {
-      const user = userService.findUserByTokenOrFail(userToken)
-      await this.validateSupplier(args, user, res)
-      return Supplier.create({
-        user,
-        ...args
-      })
-    } catch (err) {
-      throw new Error(err)
-    }
+  async create (args: ISupplierArgs, userToken: string): Promise<ISupplierDocument> {
+    const user = userService.findUserByTokenOrFail(userToken)
+    await this.validateSupplier(args, user)
+    return Supplier.create({
+      user,
+      ...args
+    })
   }
 
   async findByUser (
@@ -39,7 +35,7 @@ export class SupplierService {
     }
   }
 
-  async validateSupplier (args: ISupplierArgs, user: string, res: Response) {
+  async validateSupplier (args: ISupplierArgs, user: string) {
     const errors: {
       name?: string
       abbreviation?: string
@@ -57,9 +53,14 @@ export class SupplierService {
 
     if (duplicitName) errors.name = 'duplicit'
     if (duplicitAbbreviation) errors.abbreviation = 'duplicit'
-    if (validator.isEmpty(args.name)) errors.name = 'empty'
+    if (!validator.isLength(args.name, { min: 1, max: 20 })) errors.name = 'must be between 1 and 20 characters'
+    if (args.abbreviation && !validator.isLength(args.abbreviation, { max: 3 })) errors.abbreviation = 'must be max 3 characters'
 
-    if (!isEmpty(errors)) return res.status(400).json(errors)
+    if (!isEmpty(errors)) {
+      throw new UserInputError('Validation error', {
+        errors
+      })
+    }
   }
 
   async delete (_id: string, userToken: string): Promise<boolean> {

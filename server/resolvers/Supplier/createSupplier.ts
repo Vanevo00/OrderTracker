@@ -12,10 +12,9 @@ export default {
           cookies: {
             userToken
           }
-        },
-        res
+        }
       } = ctx
-      return await supplierService.create(args, userToken, res)
+      return await supplierService.create(args, userToken)
     }
   }
 }
