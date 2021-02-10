@@ -6,6 +6,7 @@ import prepareSortingObject from '../utils/prepareSortingObject'
 import validator from 'validator'
 import isEmpty from '../utils/isEmpty'
 import { UserInputError } from 'apollo-server-express'
+import { VALIDATION_ERROR } from '../../common/errorCodes'
 
 const userService = new UserService()
 
@@ -51,13 +52,13 @@ export class SupplierService {
       })
     ])
 
-    if (duplicitName) errors.name = 'duplicit'
-    if (duplicitAbbreviation) errors.abbreviation = 'duplicit'
-    if (!validator.isLength(args.name, { min: 1, max: 20 })) errors.name = 'must be between 1 and 20 characters'
-    if (args.abbreviation && !validator.isLength(args.abbreviation, { max: 3 })) errors.abbreviation = 'must be max 3 characters'
+    if (duplicitName) errors.name = 'dodavatel s tímto jménem již existuje'
+    if (duplicitAbbreviation) errors.abbreviation = 'dodavatel s touto zkratkou již existuje'
+    if (!validator.isLength(args.name, { min: 1, max: 20 })) errors.name = 'jméno musí být mezi 1 a 20 znaky'
+    if (args.abbreviation && !validator.isLength(args.abbreviation, { max: 3 })) errors.abbreviation = 'zkratka může mít maximálně 3 znaky'
 
     if (!isEmpty(errors)) {
-      throw new UserInputError('Validation error', {
+      throw new UserInputError(VALIDATION_ERROR, {
         errors
       })
     }

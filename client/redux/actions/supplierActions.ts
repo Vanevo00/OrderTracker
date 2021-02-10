@@ -4,6 +4,7 @@ import * as types from '../types'
 import { GET_SUPPLIERS } from '../../apollo/queries/getSuppliers'
 import { ISupplierArgs } from '../../../types/Supplier'
 import { CREATE_SUPPLIER } from '../../apollo/mutations/createSupplier'
+import { VALIDATION_ERROR } from '../../../common/errorCodes'
 
 export const setSuppliers = () => async (dispatch: Dispatch) => {
   try {
@@ -59,6 +60,18 @@ export const createSupplier = (supplier: ISupplierArgs) => async (dispatch: Disp
       payload
     })
   } catch (err) {
-    console.log(err)
+    if (err.graphQLErrors && err.graphQLErrors[0].message === VALIDATION_ERROR) {
+      dispatch({
+        type: types.ADD_SUPPLIER_ERROR,
+        payload: err.graphQLErrors[0].extensions.errors
+      })
+    } else {
+      dispatch({
+        type: types.ADD_SUPPLIER_ERROR,
+        payload: {
+          general: 'vyskytla se chyba, zkuste to prosím později'
+        }
+      })
+    }
   }
 }
