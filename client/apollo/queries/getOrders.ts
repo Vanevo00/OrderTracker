@@ -17,6 +17,7 @@ export const GET_ORDERS = gql`
             notes
             smsSent
             pickedUp
+            orderedOn
             toBeReadyOn
             updated
             created

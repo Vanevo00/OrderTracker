@@ -25,7 +25,9 @@ const OrderForm = () => {
     client,
     phone,
     email,
-    supplier
+    supplier,
+    product,
+    orderedOn
   } = activeOrder
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +105,20 @@ const OrderForm = () => {
           }]}
           value={supplier._id || undefined}
           onChange={onSupplierChange}
+        />
+        <OrderFormInput
+          label='produkt'
+          type='text'
+          name='product'
+          value={product || ''}
+          onChange={onChange}
+        />
+        <OrderFormInput
+          label='objednáno'
+          type='date'
+          name='orderedOn'
+          value={orderedOn || ''}
+          onChange={onChange}
         />
       </Form>
       <AddSupplierModal/>
