@@ -18,7 +18,6 @@ const OrderFormSelect = ({ label, name, options, extraOptions, value, onChange }
       <label className='order-form-label' htmlFor={name}><strong>{label}:</strong></label>
       <div className='flex-grow-1'>
         <select value={value} onChange={onChange} name={name} id={name} className='ml-1 order-form-input white-background'>
-          <option value={undefined}>zvolte...</option>
           {options.map((option) => <option key={option._id} value={option._id}>{option.name}</option>)}
           {extraOptions.map((option) => <option key={option.value} value={option.value}>{option.name}</option>)}
         </select>
