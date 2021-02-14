@@ -13,7 +13,7 @@ export const UPDATE_ORDER = gql`
         $smsSent: Boolean
         $pickedUp: Boolean
         $toBeReadyOn: String
-        $orderedOn: Date
+        $orderedOn: String
         $created: Date
     ) {
         updateOrder(

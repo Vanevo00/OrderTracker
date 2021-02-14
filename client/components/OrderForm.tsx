@@ -27,7 +27,9 @@ const OrderForm = () => {
     email,
     supplier,
     product,
-    orderedOn
+    orderedOn,
+    created,
+    toBeReadyOn
   } = activeOrder
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -82,6 +84,13 @@ const OrderForm = () => {
           onChange={onChange}
         />
         <OrderFormInput
+          label='objednáno klientem'
+          type='date'
+          name='created'
+          value={created || ''}
+          onChange={onChange}
+        />
+        <OrderFormInput
           label='telefon'
           type='tel'
           name='phone'
@@ -114,10 +123,17 @@ const OrderForm = () => {
           onChange={onChange}
         />
         <OrderFormInput
-          label='objednáno'
-          type='date'
+          label='objednáno u dodavatele'
+          type='text'
           name='orderedOn'
           value={orderedOn || ''}
+          onChange={onChange}
+        />
+        <OrderFormInput
+          label='termín vydání'
+          type='text'
+          name='toBeReadyOn'
+          value={toBeReadyOn || ''}
           onChange={onChange}
         />
       </Form>

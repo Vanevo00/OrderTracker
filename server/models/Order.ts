@@ -39,10 +39,10 @@ const OrderSchema = new Schema({
     type: Boolean
   },
   toBeReadyOn: {
-    type: Date
+    type: String
   },
   orderedOn: {
-    type: Date
+    type: String
   },
   updated: {
     type: Date,
