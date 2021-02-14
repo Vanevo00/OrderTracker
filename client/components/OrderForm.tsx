@@ -29,7 +29,8 @@ const OrderForm = () => {
     product,
     orderedOn,
     created,
-    toBeReadyOn
+    toBeReadyOn,
+    smsSent
   } = activeOrder
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -134,6 +135,13 @@ const OrderForm = () => {
           type='text'
           name='toBeReadyOn'
           value={toBeReadyOn || ''}
+          onChange={onChange}
+        />
+        <OrderFormInput
+          label='sms k vyzvednutí'
+          type='text'
+          name='smsSent'
+          value={smsSent || ''}
           onChange={onChange}
         />
       </Form>

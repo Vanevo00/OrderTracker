@@ -11,7 +11,7 @@ export default gql`
         email: String
         product: String
         notes: String
-        smsSent: Boolean
+        smsSent: String
         pickedUp: Boolean
         toBeReadyOn: String
         orderedOn: String
@@ -35,7 +35,7 @@ export default gql`
             email: String
             product: String
             notes: String
-            smsSent: Boolean
+            smsSent: String
             pickedUp: Boolean
             toBeReadyOn: String
             orderedOn: String
@@ -51,7 +51,7 @@ export default gql`
             email: String
             product: String
             notes: String
-            smsSent: Boolean
+            smsSent: String
             pickedUp: Boolean
             toBeReadyOn: String
             orderedOn: String

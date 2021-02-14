@@ -10,7 +10,7 @@ export const UPDATE_ORDER = gql`
         $email: String
         $product: String
         $notes: String
-        $smsSent: Boolean
+        $smsSent: String
         $pickedUp: Boolean
         $toBeReadyOn: String
         $orderedOn: String

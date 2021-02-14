@@ -33,7 +33,7 @@ const OrderSchema = new Schema({
     type: String
   },
   smsSent: {
-    type: Boolean
+    type: String
   },
   pickedUp: {
     type: Boolean

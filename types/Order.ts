@@ -12,7 +12,7 @@ export interface IOrder {
   email?: string
   product?: string
   notes?: string
-  smsSent?: boolean
+  smsSent?: string
   pickedUp?: boolean
   toBeReadyOn?: string
   orderedOn?: string
