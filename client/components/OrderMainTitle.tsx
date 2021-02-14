@@ -11,7 +11,7 @@ const OrderMainTitle = () => {
 
   const generateMainTitle = (order: IOrderPopulated) => {
     const created = order.created ? `${getShortDate(order.created)}/` : ''
-    const supplier = order.supplier.abbreviation ? `${order.supplier.abbreviation}/` : `${order.supplier.name}/`
+    const supplier = order.supplier ? order.supplier.abbreviation ? `${order.supplier.abbreviation}/` : `${order.supplier.name}/` : ''
     const orderName = `${order.name}/`
     const clientName = order.client
 

@@ -13,7 +13,8 @@ const initialOrderState = {
     phone: undefined
   },
   userStartedTyping: false,
-  orderSaveStatus: undefined
+  orderSaveStatus: undefined,
+  orderErrors: {}
 }
 
 const updateActiveOrderInOrders = (orders: IOrderPopulated[], payload: any) => {
@@ -40,7 +41,8 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
         ...state,
         userStartedTyping: false,
         activeOrder: payload,
-        orderSaveStatus: undefined
+        orderSaveStatus: undefined,
+        orderErrors: initialOrderState.orderErrors
       }
     case types.UPDATE_ACTIVE_ORDER:
       return {
@@ -53,7 +55,8 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
     case types.ORDER_SAVED:
       return {
         ...state,
-        orderSaveStatus: `uloženo v ${payload}`
+        orderSaveStatus: `uloženo v ${payload}`,
+        orderErrors: initialOrderState.orderErrors
       }
     case types.SUPPLIER_ADDED:
       return {
@@ -67,6 +70,12 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
           supplier: payload
         }),
         userStartedTyping: true
+      }
+    case types.ORDER_ERROR:
+      return {
+        ...state,
+        orderSaveStatus: 'chyba při posledním uložení formuláře',
+        orderErrors: payload
       }
     case types.NO_USER_FOR_ORDERS:
     default:

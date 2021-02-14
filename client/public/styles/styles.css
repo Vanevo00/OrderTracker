@@ -58,6 +58,20 @@
   outline: none;
 }
 
+.order-form-textarea {
+  border: solid 2px black;
+  width: 50%;
+  height: 200px;
+}
+
+.bottom-negative-4 {
+  bottom: -4px;
+}
+
+.bottom-negative-10 {
+  bottom: -10px;
+}
+
 .pointer {
   cursor: pointer;
 }

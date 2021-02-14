@@ -7,13 +7,15 @@ import OrderFormSelect from './OrderFormSelect'
 import { ISupplier } from '../../types/Supplier'
 import AddSupplierModal from './AddSupplierModal'
 import { showSupplierModal } from '../redux/actions/supplierActions'
+import OrderFormTextarea from './OrderFormTextarea'
 
 const OrderForm = () => {
   const dispatch = useDispatch()
   const {
     orderState: {
       activeOrder,
-      userStartedTyping
+      userStartedTyping,
+      orderErrors
     },
     supplierState: {
       suppliers
@@ -30,10 +32,11 @@ const OrderForm = () => {
     orderedOn,
     created,
     toBeReadyOn,
-    smsSent
+    smsSent,
+    notes
   } = activeOrder
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const updatedOrder = {
       ...activeOrder,
       [e.target.name]: e.target.value
@@ -76,6 +79,7 @@ const OrderForm = () => {
           name='name'
           value={name || ''}
           onChange={onChange}
+          error={orderErrors.name}
         />
         <OrderFormInput
           label='klient'
@@ -83,6 +87,7 @@ const OrderForm = () => {
           name='client'
           value={client || ''}
           onChange={onChange}
+          error={orderErrors.client}
         />
         <OrderFormInput
           label='objednáno klientem'
@@ -104,6 +109,7 @@ const OrderForm = () => {
           name='email'
           value={email || ''}
           onChange={onChange}
+          error={orderErrors.email}
         />
         <OrderFormSelect
           label='dodavatel'
@@ -122,6 +128,7 @@ const OrderForm = () => {
           name='product'
           value={product || ''}
           onChange={onChange}
+          error={orderErrors.product}
         />
         <OrderFormInput
           label='objednáno u dodavatele'
@@ -129,6 +136,7 @@ const OrderForm = () => {
           name='orderedOn'
           value={orderedOn || ''}
           onChange={onChange}
+          error={orderErrors.orderedOn}
         />
         <OrderFormInput
           label='termín vydání'
@@ -136,6 +144,7 @@ const OrderForm = () => {
           name='toBeReadyOn'
           value={toBeReadyOn || ''}
           onChange={onChange}
+          error={orderErrors.toBeReadyOn}
         />
         <OrderFormInput
           label='sms k vyzvednutí'
@@ -143,6 +152,14 @@ const OrderForm = () => {
           name='smsSent'
           value={smsSent || ''}
           onChange={onChange}
+          error={orderErrors.smsSent}
+        />
+        <OrderFormTextarea
+          label='poznámky'
+          name='notes'
+          value={notes || ''}
+          onChange={onChange}
+          error={orderErrors.notes}
         />
       </Form>
       <AddSupplierModal/>

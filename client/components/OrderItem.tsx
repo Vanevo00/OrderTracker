@@ -18,11 +18,10 @@ const OrderItem = ({ order }: Props) => {
   const {
     client,
     created,
-    supplier: {
-      name: supplierName
-    },
     name
   } = order
+
+  const supplierName = order.supplier?.name ? order.supplier?.name : ''
 
   const onClick = () => {
     dispatch(setActiveOrder(order))

@@ -5,6 +5,7 @@ import { IOrderPopulated } from '../../../types/Order'
 import getCurrentTime from '../../utils/getCurrentTime'
 import { UPDATE_ORDER } from '../../apollo/mutations/updateOrder'
 import { GET_ORDERS } from '../../apollo/queries/getOrders'
+import { VALIDATION_ERROR } from '../../../common/errorCodes'
 
 export const setOrders = () => async (dispatch: Dispatch) => {
   try {
@@ -43,7 +44,7 @@ export const updateActiveOrder = (payload: IOrderPopulated) => (dispatch: Dispat
 
 export const saveUpdatedOrder = (payload: IOrderPopulated) => async (dispatch: Dispatch) => {
   try {
-    apolloClient.mutate({
+    await apolloClient.mutate({
       mutation: UPDATE_ORDER,
       variables: {
         ...payload,
@@ -56,8 +57,18 @@ export const saveUpdatedOrder = (payload: IOrderPopulated) => async (dispatch: D
       payload: getCurrentTime()
     })
   } catch (err) {
-    dispatch({
-      type: types.ORDER_SAVE_ERROR
-    })
+    if (err.graphQLErrors && err.graphQLErrors[0].message === VALIDATION_ERROR) {
+      dispatch({
+        type: types.ORDER_ERROR,
+        payload: err.graphQLErrors[0].extensions.errors
+      })
+    } else {
+      dispatch({
+        type: types.ORDER_ERROR,
+        payload: {
+          general: 'vyskytla se chyba, zkuste to prosím později'
+        }
+      })
+    }
   }
 }
