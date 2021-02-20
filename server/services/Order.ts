@@ -76,6 +76,7 @@ export class OrderService {
     if (!validator.isLength(args.name, { max: 100 })) errors.name = 'název objednávky může mít max. 100 znaků'
     if (validator.isEmpty(args.client, { ignore_whitespace: true })) errors.client = 'jméno klienta musí být vyplněno'
     if (!validator.isLength(args.client, { max: 100 })) errors.client = 'jméno klienta může mít max. 100 znaků'
+    if (typeof args.email !== 'undefined' && !validator.isEmail(args.email)) errors.email = 'nesprávný formát emailu'
     if (typeof args.product !== 'undefined' && !validator.isLength(args.product, { max: 200 })) errors.product = 'popis produktu může mít max. 200 znaků'
     if (typeof args.orderedOn !== 'undefined' && !validator.isLength(args.orderedOn, { max: 100 })) errors.orderedOn = 'termín objednávky může mít max. 100 znaků'
     if (typeof args.toBeReadyOn !== 'undefined' && !validator.isLength(args.toBeReadyOn, { max: 100 })) errors.toBeReadyOn = 'termín vydání může mít max. 100 znaků'
