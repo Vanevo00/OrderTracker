@@ -4,9 +4,9 @@ export default gql`
     type Order {
         _id: ID!
         user: User!
-        supplier: Supplier!
-        name: String!
-        client: String!
+        supplier: Supplier
+        name: String
+        client: String
         phone: String
         email: String
         product: String
@@ -28,9 +28,9 @@ export default gql`
 
     extend type Mutation {
         createOrder(
-            supplier: ID!
-            name: String!
-            client: String!
+            supplier: ID
+            name: String
+            client: String
             phone: String
             email: String
             product: String
@@ -44,9 +44,9 @@ export default gql`
         
         updateOrder(
             _id: ID!
-            supplier: ID!
-            name: String!
-            client: String!
+            supplier: ID
+            name: String
+            client: String
             phone: String
             email: String
             product: String
