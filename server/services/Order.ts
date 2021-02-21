@@ -76,12 +76,12 @@ export class OrderService {
     if (!validator.isLength(args.name, { max: 100 })) errors.name = 'název objednávky může mít max. 100 znaků'
     if (validator.isEmpty(args.client, { ignore_whitespace: true })) errors.client = 'jméno klienta musí být vyplněno'
     if (!validator.isLength(args.client, { max: 100 })) errors.client = 'jméno klienta může mít max. 100 znaků'
-    if (typeof args.email !== 'undefined' && !validator.isEmail(args.email)) errors.email = 'nesprávný formát emailu'
-    if (typeof args.product !== 'undefined' && !validator.isLength(args.product, { max: 200 })) errors.product = 'popis produktu může mít max. 200 znaků'
-    if (typeof args.orderedOn !== 'undefined' && !validator.isLength(args.orderedOn, { max: 100 })) errors.orderedOn = 'termín objednávky může mít max. 100 znaků'
-    if (typeof args.toBeReadyOn !== 'undefined' && !validator.isLength(args.toBeReadyOn, { max: 100 })) errors.toBeReadyOn = 'termín vydání může mít max. 100 znaků'
-    if (typeof args.smsSent !== 'undefined' && !validator.isLength(args.smsSent, { max: 100 })) errors.smsSent = 'poznámka k sms může mít max. 100 znaků'
-    if (typeof args.notes !== 'undefined' && !validator.isLength(args.notes, { max: 1000 })) errors.notes = 'poznámka může mít max. 1000 znaků'
+    if (!isEmpty(args.email) && !validator.isEmail(<string>args.email)) errors.email = 'nesprávný formát emailu'
+    if (!isEmpty(args.product) && !validator.isLength(<string>args.product, { max: 200 })) errors.product = 'popis produktu může mít max. 200 znaků'
+    if (!isEmpty(args.orderedOn) && !validator.isLength(<string>args.orderedOn, { max: 100 })) errors.orderedOn = 'termín objednávky může mít max. 100 znaků'
+    if (!isEmpty(args.toBeReadyOn) && !validator.isLength(<string>args.toBeReadyOn, { max: 100 })) errors.toBeReadyOn = 'termín vydání může mít max. 100 znaků'
+    if (!isEmpty(args.smsSent) && !validator.isLength(<string>args.smsSent, { max: 100 })) errors.smsSent = 'poznámka k sms může mít max. 100 znaků'
+    if (!isEmpty(args.notes) && !validator.isLength(<string>args.notes, { max: 1000 })) errors.notes = 'poznámka může mít max. 1000 znaků'
 
     if (!isEmpty(errors)) {
       throw new UserInputError(VALIDATION_ERROR, {
