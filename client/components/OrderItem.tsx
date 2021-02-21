@@ -1,6 +1,6 @@
 import React from 'react'
 import { IOrderPopulated } from '../../types/Order'
-import getShortDate from '../utils/getShortDate'
+import formatDate from '../utils/formatDate'
 import { setActiveOrder } from '../redux/actions/orderActions'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 
@@ -32,7 +32,7 @@ const OrderItem = ({ order }: Props) => {
       <p><strong>{name}</strong></p>
       <p>dodavatel: {supplierName}</p>
       <p>klient: {client}</p>
-      <p>{created && getShortDate(created)}</p>
+      <p>{created && formatDate(created)}</p>
     </div>
   )
 }
