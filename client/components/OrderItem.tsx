@@ -29,7 +29,7 @@ const OrderItem = ({ order }: Props) => {
 
   return (
     <div className={`order-item pointer ${isActive && 'white-background'}`} onClick={onClick}>
-      <p><strong>{name}</strong></p>
+      <p><strong>{name ? name : '[ bez názvu ]'}</strong></p>
       <p>dodavatel: {supplierName}</p>
       <p>klient: {client}</p>
       <p>{created && formatDate(created)}</p>

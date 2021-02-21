@@ -10,8 +10,10 @@ const OrderMainTitle = () => {
   } = useSelector((state: RootStateOrAny) => state.orderState)
 
   const generateMainTitle = (order: IOrderPopulated) => {
+    if (!order.name) return '[ bez názvu ]'
+
     const created = order.created ? `${formatDate(order.created)}/` : ''
-    const supplier = order.supplier ? order.supplier.abbreviation ? `${order.supplier.abbreviation}/` : `${order.supplier.name}/` : ''
+    const supplier = order.supplier.name ? order.supplier.abbreviation ? `${order.supplier.abbreviation}/` : `${order.supplier.name}/` : ''
     const orderName = `${order.name}/`
     const clientName = order.client
 

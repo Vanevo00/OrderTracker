@@ -9,16 +9,13 @@ const OrderSchema = new Schema({
   },
   supplier: {
     type: Schema.Types.ObjectId,
-    ref: 'supplier',
-    required: true
+    ref: 'supplier'
   },
   name: {
-    type: String,
-    required: true
+    type: String
   },
   client: {
-    type: String,
-    required: true
+    type: String
   },
   phone: {
     type: String
