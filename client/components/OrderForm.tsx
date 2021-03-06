@@ -33,7 +33,8 @@ const OrderForm = () => {
     created,
     toBeReadyOn,
     smsSent,
-    notes
+    notes,
+    isNew
   } = activeOrder
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -62,7 +63,7 @@ const OrderForm = () => {
   }
 
   useEffect(() => {
-    if (userStartedTyping) {
+    if (userStartedTyping && !isNew) {
       const timeoutId = setTimeout(() => {
         dispatch(saveUpdatedOrder(activeOrder))
       }, 1000)
@@ -119,7 +120,7 @@ const OrderForm = () => {
             name: 'přidat nového dodavatele',
             value: 'addSupplier'
           }]}
-          value={supplier._id || undefined}
+          value={supplier?._id || undefined}
           onChange={onSupplierChange}
         />
         <OrderFormInput

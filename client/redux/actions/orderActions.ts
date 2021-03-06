@@ -6,6 +6,7 @@ import getCurrentTime from '../../utils/getCurrentTime'
 import { UPDATE_ORDER } from '../../apollo/mutations/updateOrder'
 import { GET_ORDERS } from '../../apollo/queries/getOrders'
 import { VALIDATION_ERROR } from '../../../common/errorCodes'
+import { CREATE_EMPTY_ORDER } from '../../apollo/mutations/createEmptyOrder'
 
 export const setOrders = () => async (dispatch: Dispatch) => {
   try {
@@ -28,6 +29,21 @@ export const setOrders = () => async (dispatch: Dispatch) => {
   }
 }
 
+export const startNewOrder = () => async (dispatch: Dispatch) => {
+  const {
+    data: {
+      createOrder: payload
+    }
+  } = await apolloClient.mutate({
+    mutation: CREATE_EMPTY_ORDER
+  })
+
+  dispatch({
+    type: types.START_NEW_ORDER,
+    payload
+  })
+}
+
 export const setActiveOrder = (payload: IOrderPopulated) => (dispatch: Dispatch) => {
   dispatch({
     type: types.SET_ACTIVE_ORDER,
@@ -48,7 +64,7 @@ export const saveUpdatedOrder = (payload: IOrderPopulated) => async (dispatch: D
       mutation: UPDATE_ORDER,
       variables: {
         ...payload,
-        supplier: payload.supplier._id
+        supplier: payload.supplier?._id
       }
     })
 
@@ -63,6 +79,7 @@ export const saveUpdatedOrder = (payload: IOrderPopulated) => async (dispatch: D
         payload: err.graphQLErrors[0].extensions.errors
       })
     } else {
+      console.log('saveUpdatedOrder error:', err)
       dispatch({
         type: types.ORDER_ERROR,
         payload: {

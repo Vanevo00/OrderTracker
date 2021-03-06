@@ -3,6 +3,7 @@ import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
 import { useRouter } from 'next/router'
+import { startNewOrder } from '../redux/actions/orderActions'
 
 const MainMenu = () => {
   const dispatch = useDispatch()
@@ -21,6 +22,10 @@ const MainMenu = () => {
     router.reload()
   }
 
+  const onStartNewOrder = async () => {
+    await dispatch(startNewOrder())
+  }
+
   return (
     <Navbar bg='dark' variant='dark' className={`${device === 'mobile' && 'justify-content-between'}`}>
       <Nav>
@@ -28,7 +33,7 @@ const MainMenu = () => {
           <NavDropdown.Item onClick={onLogout}>Odhlásit se</NavDropdown.Item>
         </NavDropdown>
       </Nav>
-      <Button size="sm" variant="success" className={`rounded-pill ${device === 'desktop' && 'ml-5'}`}><strong>+</strong> Nová zakázka</Button>
+      <Button size="sm" variant="success" className={`rounded-pill ${device === 'desktop' && 'ml-5'}`} onClick={onStartNewOrder}><strong>+</strong> Nová zakázka</Button>
     </Navbar>
   )
 }

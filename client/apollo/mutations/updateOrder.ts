@@ -3,9 +3,9 @@ import { gql } from '@apollo/client'
 export const UPDATE_ORDER = gql`
     mutation (
         $_id: ID!
-        $supplier: ID!
-        $name: String!
-        $client: String!
+        $supplier: ID
+        $name: String
+        $client: String
         $phone: String
         $email: String
         $product: String

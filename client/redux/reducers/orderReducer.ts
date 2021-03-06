@@ -9,9 +9,7 @@ interface orderReducerArgs {
 const initialOrderState = {
   loadingOrders: true,
   orders: [],
-  activeOrder: {
-    phone: undefined
-  },
+  activeOrder: {},
   userStartedTyping: false,
   orderSaveStatus: undefined,
   orderErrors: {}
@@ -42,6 +40,18 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
         userStartedTyping: false,
         activeOrder: payload,
         orderSaveStatus: undefined,
+        orderErrors: initialOrderState.orderErrors
+      }
+    case types.START_NEW_ORDER:
+      return {
+        ...state,
+        orders: [
+          payload,
+          ...state.orders
+        ],
+        userStartedTyping: false,
+        activeOrder: payload,
+        orderSaveStatus: 'zatím neuloženo',
         orderErrors: initialOrderState.orderErrors
       }
     case types.UPDATE_ACTIVE_ORDER:

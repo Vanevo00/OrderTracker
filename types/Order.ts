@@ -18,6 +18,7 @@ export interface IOrder {
   orderedOn?: string
   updated?: string
   created?: string
+  isBeingCreated?: boolean
 }
 
 export interface IOrderPopulated extends IOrder {
