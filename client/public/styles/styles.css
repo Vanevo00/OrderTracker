@@ -42,8 +42,12 @@
   }
 }
 
-.height-remainder {
+.min-height-remainder {
   min-height: calc(100vh - 56px);
+}
+
+.height-remainder {
+  height: calc(100vh - 56px);
 }
 
 .full-width-height {
@@ -80,6 +84,7 @@
   border-right: solid 1px #dcdcdc;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .order-item {
