@@ -8,6 +8,7 @@ import { ISupplier } from '../../types/Supplier'
 import AddSupplierModal from './AddSupplierModal'
 import { showSupplierModal } from '../redux/actions/supplierActions'
 import OrderFormTextarea from './OrderFormTextarea'
+import { DEVICE_DESKTOP } from '../../common/devices'
 
 const OrderForm = () => {
   const dispatch = useDispatch()
@@ -15,12 +16,22 @@ const OrderForm = () => {
     orderState: {
       activeOrder,
       userStartedTyping,
-      orderErrors
+      orderErrors,
+      orders
+    },
+    deviceState: {
+      device
     },
     supplierState: {
       suppliers
     }
   } = useSelector((state: RootStateOrAny) => state)
+
+  useEffect(() => {
+    if (!activeOrder._id && device === DEVICE_DESKTOP) {
+      dispatch(updateActiveOrder(orders[0]))
+    }
+  }, [])
 
   const {
     name,

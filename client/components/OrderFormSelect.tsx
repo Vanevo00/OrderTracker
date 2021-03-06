@@ -13,8 +13,6 @@ interface Props {
 }
 
 const OrderFormSelect = ({ label, name, options, extraOptions, value, onChange }: Props) => {
-  console.log('value', value)
-
   return (
     <div className='d-flex'>
       <label className='order-form-label' htmlFor={name}><strong>{label}:</strong></label>

@@ -1,4 +1,5 @@
 import * as types from '../types'
+import { DEVICE_DESKTOP } from '../../../common/devices'
 
 interface deviceReducerArgs {
   type: string
@@ -6,7 +7,7 @@ interface deviceReducerArgs {
 }
 
 const initialDeviceState = {
-  device: 'desktop'
+  device: DEVICE_DESKTOP
 }
 
 export const deviceReducer = (state = initialDeviceState, { type, payload }: deviceReducerArgs) => {
