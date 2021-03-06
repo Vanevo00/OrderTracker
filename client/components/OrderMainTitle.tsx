@@ -9,16 +9,23 @@ const OrderMainTitle = () => {
     orderSaveStatus
   } = useSelector((state: RootStateOrAny) => state.orderState)
 
-  const generateMainTitle = (order: IOrderPopulated) => {
+  const generateMainTitle = (order: IOrderPopulated): string => {
     if (!order.name) return '[ bez názvu ]'
 
-    const created = order.created ? `${formatDate(order.created)}/` : ''
-    const supplier = order.supplier?.name ? order.supplier.abbreviation ? `${order.supplier.abbreviation}/` : `${order.supplier.name}/` : ''
-    const orderName = `${order.name}/`
+    const detailsArray: string[] = []
 
-    const clientName = order.client
+    const pushIfAvailable = (checkedValue: string | undefined, pushedValue?: string | undefined) => {
+      if (checkedValue) {
+        detailsArray.push(pushedValue || checkedValue)
+      }
+    }
 
-    return created + supplier + orderName + clientName
+    pushIfAvailable(order.created, `${formatDate(order.created)}`)
+    pushIfAvailable(order.supplier?.name, order.supplier?.abbreviation ? order.supplier?.abbreviation : order.supplier?.name)
+    pushIfAvailable(order.name)
+    pushIfAvailable(order.client)
+
+    return detailsArray.join('/')
   }
 
   return (

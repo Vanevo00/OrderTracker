@@ -1,4 +1,5 @@
-const formatDate = (date: string, withTime?: boolean): string => {
+const formatDate = (date: string | undefined, withTime?: boolean): string | undefined => {
+  if (!date) return
   const dateObject = new Date(date)
 
   const addZeroIfNecessary = (item: number): string => ('0' + String(item)).slice(-2)
