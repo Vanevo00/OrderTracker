@@ -1,4 +1,4 @@
-import { IOrderDocument } from '../../../types/Order'
+import { IFindOrdersByUserArgs, IOrderDocument } from '../../../types/Order'
 import { IContext } from '../../../types/Context'
 import { OrderService } from '../../services/Order'
 
@@ -6,7 +6,7 @@ const orderService = new OrderService()
 
 export default {
   Query: {
-    findOrdersByUser: async (_: undefined, args: undefined, ctx: IContext): Promise<IOrderDocument[]> => {
+    findOrdersByUser: async (_: undefined, args: IFindOrdersByUserArgs, ctx: IContext): Promise<IOrderDocument[]> => {
       const {
         req: {
           cookies: {
@@ -14,7 +14,12 @@ export default {
           }
         }
       } = ctx
-      return await orderService.findByUser(userToken)
+
+      const {
+        sorting
+      } = args
+
+      return await orderService.findByUser(userToken, sorting)
     }
   }
 }

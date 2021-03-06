@@ -1,6 +1,7 @@
 import { Document } from 'mongoose'
 import { IUser } from './User'
 import { ISupplier } from './Supplier'
+import { ISorting } from './Sorting'
 
 export interface IOrder {
   _id?: any
@@ -27,6 +28,10 @@ export interface IOrderPopulated extends IOrder {
 }
 
 export interface IOrderDocument extends Document, IOrder {}
+
+export interface IFindOrdersByUserArgs {
+  sorting?: ISorting
+}
 
 export interface IOrderArgs {
   _id?: any

@@ -5,6 +5,8 @@ import validator from 'validator'
 import isEmpty from '../utils/isEmpty'
 import { UserInputError } from 'apollo-server-express'
 import { VALIDATION_ERROR } from '../../common/errorCodes'
+import { DefaultSorting, ISorting } from '../../types/Sorting'
+import prepareSortingObject from '../utils/prepareSortingObject'
 
 const userService = new UserService()
 
@@ -38,10 +40,17 @@ export class OrderService {
     return true
   }
 
-  async findByUser (userToken: string): Promise<IOrderDocument[]> {
+  async findByUser (
+    userToken: string,
+    sorting: ISorting = DefaultSorting
+  ): Promise<IOrderDocument[]> {
     try {
       const userId = userService.findUserByTokenOrFail(userToken)
-      return Order.find({ user: userId }).populate('user').populate('supplier')
+      return Order
+        .find({ user: userId })
+        .sort(prepareSortingObject(sorting))
+        .populate('user')
+        .populate('supplier')
     } catch (err) {
       throw new Error(err)
     }
