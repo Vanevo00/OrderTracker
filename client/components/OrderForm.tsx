@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect } from 'react'
 import { Form } from 'react-bootstrap'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
-import { saveUpdatedOrder, updateActiveOrder } from '../redux/actions/orderActions'
+import { saveUpdatedOrder, setActiveOrder, updateActiveOrder } from '../redux/actions/orderActions'
 import OrderFormInput from './OrderFormInput'
 import OrderFormSelect from './OrderFormSelect'
 import { ISupplier } from '../../types/Supplier'
@@ -29,7 +29,7 @@ const OrderForm = () => {
 
   useEffect(() => {
     if (!activeOrder._id && device === DEVICE_DESKTOP) {
-      dispatch(updateActiveOrder(orders[0]))
+      dispatch(setActiveOrder(orders[0]))
     }
   }, [])
 
