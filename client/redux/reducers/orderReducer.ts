@@ -44,7 +44,8 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
     case types.REMOVE_ACTIVE_ORDER:
       return {
         ...state,
-        activeOrder: initialOrderState.activeOrder
+        activeOrder: initialOrderState.activeOrder,
+        userStartedTyping: initialOrderState.userStartedTyping
       }
     case types.START_NEW_ORDER:
       return {
