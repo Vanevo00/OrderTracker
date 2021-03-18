@@ -4,6 +4,7 @@ import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
 import { useRouter } from 'next/router'
 import { startNewOrder } from '../redux/actions/orderActions'
+import { DEVICE_DESKTOP, DEVICE_MOBILE } from '../../common/devices'
 
 const MainMenu = () => {
   const dispatch = useDispatch()
@@ -27,13 +28,13 @@ const MainMenu = () => {
   }
 
   return (
-    <Navbar bg='dark' variant='dark' className={`${device === 'mobile' && 'justify-content-between'}`}>
+    <Navbar fixed='top' bg='dark' variant='dark' className={`${device === DEVICE_MOBILE && 'justify-content-between'}`}>
       <Nav>
         <NavDropdown title={user.email} id='user-dropdown'>
           <NavDropdown.Item onClick={onLogout}>Odhlásit se</NavDropdown.Item>
         </NavDropdown>
       </Nav>
-      <Button size="sm" variant="success" className={`rounded-pill ${device === 'desktop' && 'ml-5'}`} onClick={onStartNewOrder}><strong>+</strong> Nová zakázka</Button>
+      <Button size="sm" variant="success" className={`rounded-pill ${device === DEVICE_DESKTOP && 'ml-5'}`} onClick={onStartNewOrder}><strong>+</strong> Nová zakázka</Button>
     </Navbar>
   )
 }

@@ -41,6 +41,11 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
         orderSaveStatus: undefined,
         orderErrors: initialOrderState.orderErrors
       }
+    case types.REMOVE_ACTIVE_ORDER:
+      return {
+        ...state,
+        activeOrder: initialOrderState.activeOrder
+      }
     case types.START_NEW_ORDER:
       return {
         ...state,

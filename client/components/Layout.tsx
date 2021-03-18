@@ -6,7 +6,10 @@ const Layout: FunctionComponent = ({ children }) => {
   return (
     <Container fluid className='p-0'>
       <MainMenu/>
-      { children }
+      <div className='offset-navbar'>
+        { children }
+      </div>
+
     </Container>
   )
 }

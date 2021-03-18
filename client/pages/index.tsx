@@ -7,14 +7,20 @@ import useGetInitialStateValues from '../components/hooks/useGetInitialStateValu
 import OrderList from '../components/OrderList'
 import { Row } from 'react-bootstrap'
 import MainContentWrapper from '../components/MainContentWrapper'
+import { DEVICE_MOBILE } from '../../common/devices'
 
 const Home = () => {
   useGetInitialStateValues()
   const router = useRouter()
   const {
-    loadingFinished,
-    user
-  } = useSelector((state: RootStateOrAny) => state.userState)
+    userState: {
+      loadingFinished,
+      user
+    },
+    deviceState: {
+      device
+    }
+  } = useSelector((state: RootStateOrAny) => state)
 
   if (!loadingFinished) {
     return (
@@ -30,6 +36,17 @@ const Home = () => {
       <div className='full-screen'>
         <Loader/>
       </div>
+    )
+  }
+
+  if (device === DEVICE_MOBILE) {
+    return (
+      <Layout>
+        <div className='mobile-wrapper mobile-fixed-height'>
+          <OrderList/>
+          <MainContentWrapper/>
+        </div>
+      </Layout>
     )
   }
 

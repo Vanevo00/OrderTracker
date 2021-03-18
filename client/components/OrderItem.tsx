@@ -3,6 +3,7 @@ import { IOrderPopulated } from '../../types/Order'
 import formatDate from '../utils/formatDate'
 import { setActiveOrder } from '../redux/actions/orderActions'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
+import { DEVICE_MOBILE } from '../../common/devices'
 
 interface Props {
   order: IOrderPopulated
@@ -11,8 +12,13 @@ interface Props {
 const OrderItem = ({ order }: Props) => {
   const dispatch = useDispatch()
   const {
-    activeOrder
-  } = useSelector((state: RootStateOrAny) => state.orderState)
+    orderState: {
+      activeOrder
+    },
+    deviceState: {
+      device
+    }
+  } = useSelector((state: RootStateOrAny) => state)
   const isActive = activeOrder && order._id === activeOrder._id
 
   const {
@@ -25,6 +31,10 @@ const OrderItem = ({ order }: Props) => {
 
   const onClick = () => {
     dispatch(setActiveOrder(order))
+    if (device === DEVICE_MOBILE) {
+      const mainContent = document.getElementById('main')
+      mainContent && mainContent.scrollIntoView()
+    }
   }
 
   return (

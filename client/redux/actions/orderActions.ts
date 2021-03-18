@@ -51,6 +51,12 @@ export const setActiveOrder = (payload: IOrderPopulated) => (dispatch: Dispatch)
   })
 }
 
+export const removeActiveOrder = () => (dispatch: Dispatch) => {
+  dispatch({
+    type: types.REMOVE_ACTIVE_ORDER
+  })
+}
+
 export const updateActiveOrder = (payload: IOrderPopulated) => (dispatch: Dispatch) => {
   dispatch({
     type: types.UPDATE_ACTIVE_ORDER,

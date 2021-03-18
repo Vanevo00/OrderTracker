@@ -26,3 +26,16 @@
 .small-line-height {
   line-height: .75;
 }
+
+.back-button {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  border: none;
+  background-color: $white;
+  padding: 5px;
+
+  &:focus {
+    outline: none;
+  }
+}
