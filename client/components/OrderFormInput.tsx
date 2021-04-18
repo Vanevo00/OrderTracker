@@ -14,7 +14,7 @@ const OrderFormInput = ({ label, type, name, value, onChange, error }: Props) =>
 
   return (
     <div className='d-flex position-relative mb-1'>
-      <label className='order-form-label' htmlFor={name}><strong>{label}:</strong></label>
+      <label className='order-form-label text-nowrap' htmlFor={name}><strong>{label}:</strong></label>
       <div className='flex-grow-1'>
         <input
           className={`order-form-input ml-1 ${type === 'date' ? 'w-auto' : 'w-100'}`}
