@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 import * as types from '../types'
-import { apolloClient } from '../../apollo/apollo'
+import { apolloClient, resetApolloCache } from '../../apollo/apollo'
 import { IOrderPopulated } from '../../../types/Order'
 import getCurrentTime from '../../utils/getCurrentTime'
 import { UPDATE_ORDER } from '../../apollo/mutations/updateOrder'
@@ -32,6 +32,39 @@ export const setOrders = () => async (dispatch: Dispatch) => {
   }
 }
 
+export const filterOrders = (selectedArchived: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch({
+      type: types.LOADING_COMMENCED
+    })
+    let archived
+    if (selectedArchived === 'active') archived = false
+    if (selectedArchived === 'archived') archived = true
+
+    const {
+      data: {
+        findOrdersByUser: payload
+      }
+    } = await apolloClient.query({
+      query: GET_ORDERS,
+      variables: {
+        archived
+      }
+    })
+
+    console.log('payload', payload)
+
+    dispatch({
+      type: types.SET_ORDERS,
+      payload
+    })
+  } catch {
+    dispatch({
+      type: types.NO_USER_FOR_ORDERS
+    })
+  }
+}
+
 export const startNewOrder = () => async (dispatch: Dispatch) => {
   const {
     data: {
@@ -40,6 +73,7 @@ export const startNewOrder = () => async (dispatch: Dispatch) => {
   } = await apolloClient.mutate({
     mutation: CREATE_EMPTY_ORDER
   })
+  resetApolloCache()
 
   dispatch({
     type: types.START_NEW_ORDER,
@@ -76,6 +110,7 @@ export const saveUpdatedOrder = (payload: IOrderPopulated) => async (dispatch: D
         supplier: payload.supplier?._id
       }
     })
+    resetApolloCache()
 
     dispatch({
       type: types.ORDER_SAVED,

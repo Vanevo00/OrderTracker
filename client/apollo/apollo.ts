@@ -5,3 +5,5 @@ export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   credentials: 'include'
 })
+
+export const resetApolloCache = () => apolloClient.resetStore()

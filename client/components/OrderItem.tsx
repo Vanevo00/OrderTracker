@@ -3,7 +3,6 @@ import { IOrderPopulated } from '../../types/Order'
 import formatDate from '../utils/formatDate'
 import { setActiveOrder } from '../redux/actions/orderActions'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
-import { DEVICE_MOBILE } from '../../common/devices'
 import scrollToFormIfMobile from '../utils/scrollToFormIfMobile'
 
 interface Props {

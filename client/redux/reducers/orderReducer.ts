@@ -33,6 +33,11 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
         orders: payload,
         loadingOrders: false
       }
+    case types.LOADING_COMMENCED:
+      return {
+        ...state,
+        loadingOrders: true
+      }
     case types.SET_ACTIVE_ORDER:
       return {
         ...state,
