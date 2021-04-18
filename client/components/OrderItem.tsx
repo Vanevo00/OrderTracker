@@ -4,6 +4,7 @@ import formatDate from '../utils/formatDate'
 import { setActiveOrder } from '../redux/actions/orderActions'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { DEVICE_MOBILE } from '../../common/devices'
+import scrollToFormIfMobile from '../utils/scrollToFormIfMobile'
 
 interface Props {
   order: IOrderPopulated
@@ -31,10 +32,7 @@ const OrderItem = ({ order }: Props) => {
 
   const onClick = () => {
     dispatch(setActiveOrder(order))
-    if (device === DEVICE_MOBILE) {
-      const mainContent = document.getElementById('main')
-      mainContent && mainContent.scrollIntoView()
-    }
+    scrollToFormIfMobile(device)
   }
 
   return (

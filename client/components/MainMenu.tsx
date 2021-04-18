@@ -3,8 +3,9 @@ import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../redux/actions/userActions'
 import { useRouter } from 'next/router'
-import { startNewOrder } from '../redux/actions/orderActions'
+import { setActiveOrder, startNewOrder } from '../redux/actions/orderActions'
 import { DEVICE_DESKTOP, DEVICE_MOBILE } from '../../common/devices'
+import scrollToFormIfMobile from '../utils/scrollToFormIfMobile'
 
 const MainMenu = () => {
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ const MainMenu = () => {
 
   const onStartNewOrder = async () => {
     await dispatch(startNewOrder())
+    scrollToFormIfMobile(device)
   }
 
   return (
