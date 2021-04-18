@@ -16,10 +16,11 @@ export default {
       } = ctx
 
       const {
-        sorting
+        sorting,
+        filters
       } = args
 
-      return await orderService.findByUser(userToken, sorting)
+      return await orderService.findByUser(userToken, sorting, filters)
     }
   }
 }

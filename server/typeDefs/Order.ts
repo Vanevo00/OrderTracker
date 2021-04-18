@@ -17,12 +17,18 @@ export default gql`
         orderedOn: String
         updated: Date!
         created: Date!
+        archived: Boolean!
+    }
+    
+    input OrderFilters {
+        archived: Boolean
     }
 
     extend type Query {
         findOrdersByUser(
             sorting: Sorting
             paginator: Paginator
+            filters: OrderFilters
         ): [Order]
     }
 

@@ -1,8 +1,14 @@
 import { gql } from '@apollo/client'
 
 export const GET_ORDERS = gql`
-    query {
-        findOrdersByUser {
+    query(
+        $archived: Boolean
+    ) {
+        findOrdersByUser(
+            filters: {
+                archived: $archived
+            }
+        ) {
             _id
             supplier {
                 _id

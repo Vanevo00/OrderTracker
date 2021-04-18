@@ -15,7 +15,10 @@ export const setOrders = () => async (dispatch: Dispatch) => {
         findOrdersByUser: payload
       }
     } = await apolloClient.query({
-      query: GET_ORDERS
+      query: GET_ORDERS,
+      variables: {
+        archived: false
+      }
     })
 
     dispatch({

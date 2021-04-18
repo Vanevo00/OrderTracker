@@ -20,6 +20,7 @@ export interface IOrder {
   updated?: string
   created?: string
   isBeingCreated?: boolean
+  archived?: boolean
 }
 
 export interface IOrderPopulated extends IOrder {
@@ -29,8 +30,13 @@ export interface IOrderPopulated extends IOrder {
 
 export interface IOrderDocument extends Document, IOrder {}
 
+export interface IFiltersOrder {
+  archived?: boolean
+}
+
 export interface IFindOrdersByUserArgs {
   sorting?: ISorting
+  filters?: IFiltersOrder
 }
 
 export interface IOrderArgs {

@@ -50,6 +50,10 @@ const OrderSchema = new Schema({
     type: Date,
     required: true,
     default: Date.now
+  },
+  archived: {
+    type: Boolean,
+    default: false
   }
 })
 

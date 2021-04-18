@@ -1,4 +1,4 @@
-import { IOrderArgs, IOrderDocument } from '../../types/Order'
+import { IFiltersOrder, IOrderArgs, IOrderDocument } from '../../types/Order'
 import { UserService } from './User'
 import { Order } from '../models/Order'
 import validator from 'validator'
@@ -42,12 +42,13 @@ export class OrderService {
 
   async findByUser (
     userToken: string,
-    sorting: ISorting = DefaultSorting
+    sorting: ISorting = DefaultSorting,
+    filters: IFiltersOrder = {}
   ): Promise<IOrderDocument[]> {
     try {
       const userId = userService.findUserByTokenOrFail(userToken)
       return Order
-        .find({ user: userId })
+        .find({ user: userId, ...filters })
         .sort(prepareSortingObject(sorting))
         .populate('user')
         .populate('supplier')
