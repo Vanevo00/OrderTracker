@@ -7,6 +7,7 @@ import { UPDATE_ORDER } from '../../apollo/mutations/updateOrder'
 import { GET_ORDERS } from '../../apollo/queries/getOrders'
 import { VALIDATION_ERROR } from '../../../common/errorCodes'
 import { CREATE_EMPTY_ORDER } from '../../apollo/mutations/createEmptyOrder'
+import { ARCHIVE_ORDER } from '../../apollo/mutations/archiveOrder'
 
 export const setOrders = () => async (dispatch: Dispatch) => {
   try {
@@ -131,5 +132,24 @@ export const saveUpdatedOrder = (payload: IOrderPopulated) => async (dispatch: D
         }
       })
     }
+  }
+}
+
+export const archiveOrder = (payload: string) => async (dispatch: Dispatch) => {
+  try {
+    await apolloClient.mutate({
+      mutation: ARCHIVE_ORDER,
+      variables: {
+        id: payload
+      }
+    })
+    resetApolloCache()
+
+    dispatch({
+      type: types.ORDER_ARCHIVED,
+      payload
+    })
+  } catch (err) {
+    console.log('archiveOrder error:', err)
   }
 }

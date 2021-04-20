@@ -25,6 +25,8 @@ const updateActiveOrderInOrders = (orders: IOrderPopulated[], payload: any) => {
   })
 }
 
+const removeArchivedOrderFromOrders = (orders: IOrderPopulated[], archivedOrderId: string) => orders.filter((order) => order._id !== archivedOrderId)
+
 export const orderReducer = (state = initialOrderState, { type, payload }: orderReducerArgs) => {
   switch (type) {
     case types.SET_ORDERS:
@@ -90,6 +92,11 @@ export const orderReducer = (state = initialOrderState, { type, payload }: order
           supplier: payload
         }),
         userStartedTyping: true
+      }
+    case types.ORDER_ARCHIVED:
+      return {
+        ...state,
+        orders: removeArchivedOrderFromOrders(state.orders, payload)
       }
     case types.ORDER_ERROR:
       return {
