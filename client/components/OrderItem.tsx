@@ -4,9 +4,7 @@ import formatDate from '../utils/formatDate'
 import { setActiveOrder } from '../redux/actions/orderActions'
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux'
 import scrollToFormIfMobile from '../utils/scrollToFormIfMobile'
-import { Button } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArchive } from '@fortawesome/free-solid-svg-icons'
+import ArchiveButton from './ArchiveButton'
 
 interface Props {
   order: IOrderPopulated
@@ -27,7 +25,8 @@ const OrderItem = ({ order }: Props) => {
   const {
     client,
     created,
-    name
+    name,
+    archived
   } = order
 
   const supplierName = order.supplier?.name ? order.supplier?.name : ''
@@ -46,9 +45,12 @@ const OrderItem = ({ order }: Props) => {
           <p>klient: {client}</p>
           <p>{created && formatDate(created)}</p>
         </div>
-        <div className='d-flex w-25 justify-content-center align-items-center'>
-          <Button variant='success' size='sm'><FontAwesomeIcon icon={faArchive}/></Button>
-        </div>
+        {
+          !archived &&
+          <ArchiveButton
+            order={order}
+          />
+        }
       </div>
     </div>
   )
