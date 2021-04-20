@@ -67,5 +67,9 @@ export default gql`
         deleteOrder(
             _id: ID!
         ): Boolean
+
+        archiveOrder(
+            _id: ID!
+        ): Boolean
     }
 `

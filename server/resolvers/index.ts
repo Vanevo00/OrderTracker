@@ -12,6 +12,7 @@ import createOrder from './Order/createOrder'
 import findOrdersByUser from './Order/findOrdersByUser'
 import updateOrder from './Order/updateOrder'
 import deleteOrder from './Order/deleteOrder'
+import archiveOrder from './Order/archiveOrder'
 
 export default merge(
   findOneUser,
@@ -25,6 +26,7 @@ export default merge(
   findSuppliersByUser,
   createOrder,
   updateOrder,
+  archiveOrder,
   deleteOrder,
   findOrdersByUser
 )

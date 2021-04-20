@@ -70,6 +70,21 @@ export class OrderService {
     return true
   }
 
+  async archive (_id: string, userToken: string): Promise<boolean> {
+    const [userId, order] = await Promise.all([
+      userService.findUserByTokenOrFail(userToken),
+      Order.findById(_id).populate('user')
+    ])
+
+    if (!order) throw new Error('order not found')
+
+    if (typeof order.user === 'object' && userId !== order.user._id.toString()) throw new Error('unauthorised')
+    await order.updateOne({
+      archived: true
+    })
+    return true
+  }
+
   validateOrder (args: IOrderArgs) {
     const errors: {
       name?: string
