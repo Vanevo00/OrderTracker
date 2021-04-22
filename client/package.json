@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "NODE_CONFIG_DIR=\"../config\" next dev -p 3334",
-    "build": "next build",
-    "start": "next start"
+    "build": "NODE_CONFIG_DIR=\"../config\" next build",
+    "start": "NODE_CONFIG_DIR=\"../config\" next start -p 3334"
   },
   "keywords": [],
   "author": "",

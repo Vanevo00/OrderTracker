@@ -9,8 +9,10 @@
     "start:watch": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "eslint": "eslint --ext '.js,.jsx,.ts,.tsx' .",
     "eslint:fix": "eslint --fix . --ext '.js,.jsx,.ts,.tsx' .",
-    "build": "rm -rf ./build && tsc",
-    "start": "node build/server/server.js"
+    "build": "rm -rf ./build && tsc && npm run build --prefix client",
+    "start:builtserver": "node build/server/server.js",
+    "start:builtclient": "npm run start --prefix client",
+    "start:all": "concurrently \"npm run start:builtserver\" \"npm run start:builtclient\""
   },
   "repository": {
     "type": "git",
