@@ -8,7 +8,9 @@
     "start:client": "npm run dev --prefix client",
     "start:watch": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "eslint": "eslint --ext '.js,.jsx,.ts,.tsx' .",
-    "eslint:fix": "eslint --fix . --ext '.js,.jsx,.ts,.tsx' ."
+    "eslint:fix": "eslint --fix . --ext '.js,.jsx,.ts,.tsx' .",
+    "build": "rm -rf ./build && tsc",
+    "start": "node build/server/server.js"
   },
   "repository": {
     "type": "git",

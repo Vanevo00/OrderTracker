@@ -1,4 +1,4 @@
-import { Request, Response } from '../server/node_modules/@types/express'
+import { Request, Response } from '../node_modules/@types/express'
 
 export interface IContext {
     req: Request
